@@ -7,12 +7,14 @@ public class MoveHero : MovingObject, IPlayerState
     public PlayerStateType stateType=>PlayerStateType.Move;
     public bool canMove;
     // Start is called before the first frame update
+
+   
     void Start()
     {
-        canMove = true;
+        
     }
 
-    public void Enter()
+    public void Enter(PlayerController thePC)
     {
         canMove = true;
     }
@@ -21,7 +23,7 @@ public class MoveHero : MovingObject, IPlayerState
         canMove = false;
     }
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (canMove)
         {

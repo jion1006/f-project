@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum equipItemType
+public enum EquipItemType
 {
     Head,
     Armor,
@@ -15,7 +15,7 @@ public enum equipItemType
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/EquipItem")]
 public class EquipItemData : ItemData
 {
-    equipItemType equipType;
+    public EquipItemType equipType;
     int itemAtk;
     int itemDef;
     int itemHp;

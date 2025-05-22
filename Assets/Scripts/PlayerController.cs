@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     public PlayerStateMachine thePS;
 
     private IPlayerState currentState;
-    bool invenUse = false;
-
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        thePS = FindObjectOfType<PlayerStateMachine>();        
+        thePS = FindObjectOfType<PlayerStateMachine>();
     }
 
     // Update is called once per frame
@@ -21,12 +21,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (!invenUse)
+            if (thePS.currentType==PlayerStateType.Move)
             {
                 thePS.changeState(PlayerStateType.Inven);
-                invenUse = !invenUse;
             }
-            else
+            else if(thePS.currentType==PlayerStateType.Inven)
                 thePS.changeState(PlayerStateType.Move);
         }
     }

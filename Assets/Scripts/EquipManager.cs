@@ -1,25 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EquipManager : MonoBehaviour
 {
-    public EquipItemData[] theEq;
-    public GameObject[] go;
+    private EquipItemData[] theEq;
     // Start is called before the first frame update
+
+    public static EquipManager Instance { get; private set; }
+
+    public event Action OnEquipChange;
     void Awake()
     {
-        int equipnum = System.Enum.GetNames(typeof(equipItemType)).Length;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        int equipnum = System.Enum.GetNames(typeof(EquipItemType)).Length;
         theEq = new EquipItemData[equipnum];
     }
 
     void Equip(EquipItemData _equipItem)
     {
-
+        if (theEq[(int)_equipItem.equipType] == null)
+        {
+            theEq[(int)_equipItem.equipType] = _equipItem;
+            OnEquipChange.Invoke();
+        }
     }
 
-    void UnEquip(equipItemType _equipType)
+    EquipItemData UnEquip(EquipItemType _equipType)
     {
-        
+        EquipItemData nData = theEq[(int)_equipType];
+        theEq[(int)_equipType] = null;
+        OnEquipChange.Invoke();
+        return nData;
+    }
+
+    public EquipItemData GetEquipItem(EquipItemType _equipType)
+    {
+        return theEq[(int)_equipType];
     }
 }
