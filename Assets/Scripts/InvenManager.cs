@@ -9,8 +9,10 @@ public class InvenManager : MonoBehaviour
     // Start is called before the first frame update
 
     public static InvenManager Instance;
+    
 
     public event Action OnitemChanged;
+    public InvenInfoUI theInfo;
 
     public int slotsize = 40;
 

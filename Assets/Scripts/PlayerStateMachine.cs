@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IPlayerState
 {
-    PlayerStateType stateType{ get; }
-    void Enter(PlayerController thePC);
+    PlayerStateType stateType { get; }
+    void Enter(PlayerController thePC, PlayerStateMachine theSM);
     void Update();
     void Exit();
+    void HandleInput();
 }
 
 public enum PlayerStateType
@@ -49,7 +50,7 @@ public class PlayerStateMachine : MonoBehaviour
         thePC = FindObjectOfType<PlayerController>();
         currentType = PlayerStateType.Move;
         currentState = stateDI[currentType];
-        currentState.Enter(thePC);
+        currentState.Enter(thePC,this);
 
     }
 
@@ -59,12 +60,12 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    public void changeState(PlayerStateType _thePST)
+    public void ChangeState(PlayerStateType _thePST)
     {
         currentState?.Exit();
         currentType = _thePST;
         currentState = stateDI[_thePST];
-        currentState.Enter(thePC);
+        currentState.Enter(thePC,this);
     }
 
 }

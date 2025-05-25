@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class MoveHero : MovingObject, IPlayerState
@@ -8,20 +9,35 @@ public class MoveHero : MovingObject, IPlayerState
     public bool canMove;
     // Start is called before the first frame update
 
+    private PlayerStateMachine stateMachine;
    
     void Start()
     {
         
     }
 
-    public void Enter(PlayerController thePC)
+    public void Enter(PlayerController thePC,PlayerStateMachine theSM)
     {
+        stateMachine = theSM;
         canMove = true;
     }
     public void Exit()
     {
         canMove = false;
     }
+    public void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            stateMachine.ChangeState(PlayerStateType.Inven);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            stateMachine.ChangeState(PlayerStateType.Attack);
+        }
+    }
+
+
     // Update is called once per frame
     public void Update()
     {
@@ -50,21 +66,5 @@ public class MoveHero : MovingObject, IPlayerState
             Stop();
         }
 
-        /*if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            move("UP");
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            move("DOWN");
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            move("RIGHT");
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            move("LEFT");
-        }*/
     }
 }

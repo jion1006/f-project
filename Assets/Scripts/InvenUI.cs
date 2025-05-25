@@ -21,8 +21,8 @@ public class InvenUI : MonoBehaviour
 
     [SerializeField]
     public List<InvenTab> invenTab;
-
     public InvenSlotUI[] invenSlotUIs;
+
     private ItemType currentType;
 
     void Start()

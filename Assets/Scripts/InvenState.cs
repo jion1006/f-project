@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InvenState : MonoBehaviour, IPlayerState
@@ -7,8 +8,11 @@ public class InvenState : MonoBehaviour, IPlayerState
     public PlayerStateType stateType => PlayerStateType.Inven;
 
     public GameObject go;
-    public void Enter(PlayerController thePC)
+
+    private PlayerStateMachine stateMachine;
+    public void Enter(PlayerController thePC, PlayerStateMachine theSM)
     {
+        stateMachine = theSM;
         Time.timeScale = 0;
         go.SetActive(true);
     }
@@ -22,6 +26,14 @@ public class InvenState : MonoBehaviour, IPlayerState
     public void Update()
     {
 
+    }
+
+    public void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.I)||Input.GetKeyDown(KeyCode.Escape))
+        {
+            stateMachine.ChangeState(PlayerStateType.Move);
+        }
     }
 
     public void Exit()
