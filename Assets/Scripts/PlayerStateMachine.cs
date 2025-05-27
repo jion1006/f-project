@@ -5,7 +5,7 @@ public interface IPlayerState
 {
     PlayerStateType stateType { get; }
     void Enter(PlayerController thePC, PlayerStateMachine theSM);
-    void Update();
+    void SUpdate();
     void Exit();
     void HandleInput();
 }
@@ -56,7 +56,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void Update()
     {
-        currentState.Update();
+        currentState.SUpdate();
     }
 
 

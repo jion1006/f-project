@@ -12,6 +12,7 @@ public class InvenState : MonoBehaviour, IPlayerState
     private PlayerStateMachine stateMachine;
     public void Enter(PlayerController thePC, PlayerStateMachine theSM)
     {
+        
         stateMachine = theSM;
         Time.timeScale = 0;
         go.SetActive(true);
@@ -23,7 +24,7 @@ public class InvenState : MonoBehaviour, IPlayerState
     }
 
     // Update is called once per frame
-    public void Update()
+    public void SUpdate()
     {
 
     }

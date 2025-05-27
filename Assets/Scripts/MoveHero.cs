@@ -39,7 +39,7 @@ public class MoveHero : MovingObject, IPlayerState
 
 
     // Update is called once per frame
-    public void Update()
+    public void SUpdate()
     {
         if (canMove)
         {

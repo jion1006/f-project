@@ -8,36 +8,75 @@ public class AttackState : MonoBehaviour,IPlayerState
 
     private Animator animator;
     private PlayerStateMachine stateMachine;
+    private Rigidbody2D rigid;
 
+    private int comboStep = 0;
+    private float comboTime = 0.8f;
+    private float timer;
+    private bool isInput = false;
     void Start()
     {
         animator = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
-    public void Enter(PlayerController thePC,PlayerStateMachine theSM)
+    public void Enter(PlayerController thePC, PlayerStateMachine theSM)
     {
         stateMachine = theSM;
-        animator.SetBool("Attack", true);
-        StartCoroutine(waitTime());
+        comboStep = 1;
+        isInput = false;
+        timer = 0f;
+        rigid.velocity = Vector2.zero;
+        animator.SetBool("Run", false);
+        animator.SetTrigger("Attack1");
     }
-    public void Update()
+    
+
+    public void SUpdate()
     {
+        timer += Time.deltaTime;
+        var currenAnim = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (comboStep == 1 && timer >= 0.2f && timer <= comboTime)
+        {
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                isInput = true;
+
+
+            }
+
+            if (currenAnim.normalizedTime > 0.9f && isInput)
+            {
+                timer = 0f;
+                animator.SetTrigger("Attack2");
+                comboStep = 2;
+            }
+        }
+
+        if (comboStep == 1 && timer > comboTime)
+        {
+            stateMachine.ChangeState(PlayerStateType.Move);
+        }
+
+        if (comboStep == 2 && currenAnim.IsName("Attack2 Tree") && currenAnim.normalizedTime > 0.9f)
+        {
+            stateMachine.ChangeState(PlayerStateType.Move);
+        }
     }
 
-    IEnumerator waitTime()
-    {
-        yield return new WaitForSeconds(0.5f);
-        stateMachine.ChangeState(PlayerStateType.Move);
-    }
+    
+
 
     public void HandleInput()
     {
-
     }
 
     public void Exit()
     {
-        animator.SetBool("Attack", false);
+        animator.ResetTrigger("Attack1");
+        animator.ResetTrigger("Attack2");
 
     }
 
