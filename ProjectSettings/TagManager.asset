@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,9 @@ TagManager:
   - BackGroud
   - Water
   - UI
-  - Word
+  - World
+  - Player
+  - Monster
   - 
   - 
   - 
@@ -25,9 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - Layer 1
-  - Layer 2
-  - Layer 3
+  - 
   - 
   - 
   - 
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
+    locked: 0
+  - name: Fade
+    uniqueID: 1920818955
     locked: 0

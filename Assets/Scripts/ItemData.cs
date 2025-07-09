@@ -11,7 +11,7 @@ public enum ItemType
     Quest
 }
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
+[CreateAssetMenu(menuName = "Data/Item")]
 public class ItemData : ScriptableObject
 {
     public ItemType itemType;
