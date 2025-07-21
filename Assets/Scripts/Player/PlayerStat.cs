@@ -13,5 +13,7 @@ public class PlayerStat
     public int crt;
     public int crtdmg;
 
+    public int coin;
+
 }
     

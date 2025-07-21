@@ -15,7 +15,7 @@ public interface IPlayerState
 public enum PlayerStateType
 {
     Move,
-    Inven,
+    UI,
     Attack,
     Damaged,
     Dead,

@@ -9,10 +9,11 @@ public class Portal : MonoBehaviour
     private DungenManager dungenM;
     [SerializeField]
     private int nextMap;
+    Camera cam;
     // Start is called before the first frame update
     void Start()
     {
-
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -25,9 +26,18 @@ public class Portal : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            dungenM.MoveToMap(nextMap);
-            collision.transform.position = nextMove.transform.position;
+            StartCoroutine(ChangeMap(collision));
         }
+    }
+
+    IEnumerator ChangeMap(Collider2D collision)
+    {
+        yield return StartCoroutine(GameManager.Instance.FadeOutScreen());
+        dungenM.MoveToMap(nextMap);
+        collision.transform.position = nextMove.transform.position;
+        cam.transform.position = nextMove.transform.position;
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(GameManager.Instance.FadeInScreen());
     }
 
 }

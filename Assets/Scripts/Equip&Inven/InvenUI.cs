@@ -23,6 +23,7 @@ public class InvenUI : MonoBehaviour
     public List<InvenTab> invenTab;
     public InvenSlotUI[] invenSlotUIs;
 
+    public GameObject total;
     private ItemType currentType;
 
     void Start()
@@ -39,16 +40,19 @@ public class InvenUI : MonoBehaviour
         OnTabSelect(invenTab[0]);
         InvenManager.Instance.OnitemChanged += RefrashUI;
         RefrashUI();
+        Time.timeScale = 0f;
     }
 
     void OnDisable()
     {
         InvenManager.Instance.OnitemChanged -= RefrashUI;
+        Time.timeScale = 1f;
     }
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OnCloseButton();
     }
 
     void OnTabSelect(InvenTab _tab)
@@ -73,10 +77,18 @@ public class InvenUI : MonoBehaviour
 
         for (int i = 0; i < array.Length; ++i)
         {
-            if(array[i]!=null)
+            if (array[i] != null)
                 invenSlotUIs[i].SetItem(array[i]);
         }
 
     }
 
+    public void OnCloseButton()
+    {
+        UIManager.Instance.CloseUI(total, () =>
+        {
+            PlayerController.Instance.thePS.ChangeState(PlayerStateType.Move);
+        });
+    }
+    
 }

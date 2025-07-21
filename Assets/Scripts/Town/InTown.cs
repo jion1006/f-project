@@ -6,6 +6,8 @@ public class InTown : MonoBehaviour
 {
     private static bool isLoading = false;
     public GameObject playerSpawn;
+    public BoxCollider2D townBound;
+    public CameraManager cameraManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,9 @@ public class InTown : MonoBehaviour
         {
             isLoading = true;
         }
+
+        townBound = GetComponent<BoxCollider2D>();
+        cameraManager.SetBound(townBound);
     }
 
     // Update is called once per frame

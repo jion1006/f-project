@@ -52,6 +52,10 @@ public class InvenManager : MonoBehaviour
                 array[i] = _item;
                 break;
             }
+            if (array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
+            {
+                array[i].itemCount++;
+            }   
         }
         OnitemChanged.Invoke();
     }

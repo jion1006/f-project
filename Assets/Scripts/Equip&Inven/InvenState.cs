@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InvenState : MonoBehaviour, IPlayerState
+public class InvenState : MonoBehaviour
 {
-    public PlayerStateType stateType => PlayerStateType.Inven;
+    
 
     public GameObject go;
 
     private PlayerStateMachine stateMachine;
     public void Enter(PlayerController thePC, PlayerStateMachine theSM)
     {
-        
         stateMachine = theSM;
         Time.timeScale = 0;
         go.SetActive(true);

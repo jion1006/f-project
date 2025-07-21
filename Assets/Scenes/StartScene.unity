@@ -267,8 +267,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 02968223389fcbf4d8d12e300771962c, type: 3}
   sfxSource: {fileID: 29476956}
   duration: 0.7
-  sfxV: 0.3
-  bgmV: 0.3
+  sfxV: 0.2
+  bgmV: 0.2
 --- !u!4 &29476955
 Transform:
   m_ObjectHideFlags: 0

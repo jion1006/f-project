@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class MoveHero : MovingObject, IPlayerState
 {
-    public PlayerStateType stateType=>PlayerStateType.Move;
+    public PlayerStateType stateType => PlayerStateType.Move;
     public bool canMove;
-    // Start is called before the first frame update
 
+    public BaseNPC nearNPC;
     private PlayerStateMachine stateMachine;
 
     void Start()
@@ -16,7 +16,7 @@ public class MoveHero : MovingObject, IPlayerState
         animator.SetFloat("DirX", 1);
     }
 
-    public void Enter(PlayerController thePC,PlayerStateMachine theSM)
+    public void Enter(PlayerController thePC, PlayerStateMachine theSM)
     {
         stateMachine = theSM;
         canMove = true;
@@ -30,11 +30,17 @@ public class MoveHero : MovingObject, IPlayerState
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            stateMachine.ChangeState(PlayerStateType.Inven);
+            stateMachine.ChangeState(PlayerStateType.UI);
+            UIManager.Instance.OnInvenPanel();
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && nearNPC == null)
         {
             stateMachine.ChangeState(PlayerStateType.Attack);
+        }
+        if (Input.GetKeyDown(KeyCode.X) && nearNPC != null)
+        {
+            stateMachine.ChangeState(PlayerStateType.UI);
+            nearNPC.OpenTargetUI();
         }
     }
 
@@ -62,5 +68,17 @@ public class MoveHero : MovingObject, IPlayerState
             Stop();
         }
 
+    }
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "NPC")
+            nearNPC = collision.GetComponent<BaseNPC>();
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<BaseNPC>() == nearNPC)
+            nearNPC = null;
     }
 }

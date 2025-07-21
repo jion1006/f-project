@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerStateMachine thePS;
     public static PlayerController Instance;
+    
 
     [SerializeField]
     private int currentHp;
@@ -64,6 +65,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     
+
 }
