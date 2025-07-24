@@ -15,12 +15,17 @@ public class ShopItem
 public class ShopUI : MonoBehaviour
 {
     public List<ShopItem> shopItems;
+    public List<ShopSlotUI> shopSlotUIs;
     public GameObject total;
+    public GameObject error;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        for (int i = 0; i < shopItems.Count; ++i)
+        {
+            shopSlotUIs[i].SetItem(shopItems[i]);
+        }
     }
 
     // Update is called once per frame
@@ -36,5 +41,10 @@ public class ShopUI : MonoBehaviour
         {
             PlayerController.Instance.thePS.ChangeState(PlayerStateType.Move);
         });
+    }
+
+    public void OnErrorPanel()
+    {
+        error.SetActive(true);
     }
 }

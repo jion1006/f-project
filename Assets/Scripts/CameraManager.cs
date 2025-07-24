@@ -34,12 +34,13 @@ public class CameraManager : MonoBehaviour
         {
             Vector3 targetPos = target.transform.position;
             targetPos.z = -10f;
+
             if (boundCollider != null)
             {
                 targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
                 targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
             }
-
+            
             this.transform.position = Vector3.Lerp(this.transform.position, targetPos, moveSpeed * Time.deltaTime);
         }
     }
@@ -55,5 +56,16 @@ public class CameraManager : MonoBehaviour
         maxX = bounds.max.x - horCar;
         minY = bounds.min.y + verCar;
         maxY = bounds.max.y - verCar;
+
+        if (target != null)
+        {
+            Vector3 targetPos = target.transform.position;
+            targetPos.z = -10f;
+
+            targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+            targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
+
+            this.transform.position=targetPos;
+        }
     }
 }

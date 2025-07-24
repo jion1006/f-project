@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShopNPC : BaseNPC
 {
+    public GameObject x;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,16 @@ public class ShopNPC : BaseNPC
     {
         PlayerController.Instance.thePS.ChangeState(PlayerStateType.UI);
         UIManager.Instance.OnShopPanel();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Player")
+            x.SetActive(true);
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name == "Player")
+            x.SetActive(false);
     }
 }
