@@ -12,7 +12,7 @@ public enum EquipItemType
     Neckless,
 }
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/EquipItem")]
+[CreateAssetMenu(fileName = "NewItem", menuName = "Data/EquipItem")]
 public class EquipItemData : ItemData
 {
     public EquipItemType equipType;

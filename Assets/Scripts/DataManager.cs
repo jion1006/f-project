@@ -16,6 +16,7 @@ public class DataManager : MonoBehaviour
 
 
     private Dictionary<int, MonsterStat> DMstate;
+    private Dictionary<int, ItemData> DItem;
 
     public static DataManager Instance;
 
@@ -32,7 +33,7 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         DMstate = LMstate.ToDictionary(stat => stat.ID);
-
+        DItem = LItem.ToDictionary(item => item.itemID);
     }
 
     public void Start()
@@ -51,5 +52,13 @@ public class DataManager : MonoBehaviour
     public PlayerStat GetPlayerStat()
     {
         return playerStat;
+    }
+
+    public ItemData GetItem(int _id)
+    {
+        var item = DItem[_id];
+        if (item != null)
+            return item;
+        return null;
     }
 }

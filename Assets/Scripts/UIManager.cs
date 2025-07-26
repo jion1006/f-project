@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject invenUI;
     public GameObject shopUI;
+    public GameObject enforceUI;
 
     public static UIManager Instance;
     void Awake()
@@ -44,12 +45,16 @@ public class UIManager : MonoBehaviour
     {
         shopUI.SetActive(true);
     }
-    
+    public void OnEnforcePanel()
+    {
+        enforceUI.SetActive(true);
+    }
     public void CloseUI(GameObject targetUI, Action close = null)
     {
         targetUI.SetActive(false);
         close.Invoke();
     }
+    
 
     
 }

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using Unity.VisualScripting;
 using UnityEngine.EventSystems;
-using Unity.PlasticSCM.Editor.WebApi;
 
-public class InvenSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemSlotUI : MonoBehaviour,
+            IPointerEnterHandler, IPointerExitHandler,IBeginDragHandler,
+            IEndDragHandler,IDragHandler,IDropHandler
+
 {
     public Image icon;
     public ItemData currentItem;
@@ -28,6 +29,28 @@ public class InvenSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         currentItem = null;
         icon.sprite = null;
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (currentItem == null)
+            return;
+        DragManager.Instance.StartDrag(this);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        DragManager.Instance.UpdateDrag(eventData.position);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        DragManager.Instance.EndDrag();
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+        DragManager.Instance.TrySwapSlot(this);
+    }
+
+
 
     public void OnPointerEnter(PointerEventData _eventData)
     {
