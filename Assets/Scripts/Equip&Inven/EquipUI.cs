@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EquipUI : MonoBehaviour
 {
     [SerializeField]
-    public Image[] equipImg;
+    public ItemSlotUI[] equipItem;
 
     // Start is called before the first frame update
 
@@ -24,10 +25,10 @@ public class EquipUI : MonoBehaviour
 
     void RefrashEUI()
     {
-        for (int i = 0; i < equipImg.Length; ++i)
+        for (int i = 0; i < equipItem.Length; ++i)
         {
             EquipItemData item = EquipManager.Instance.GetEquipItem((EquipItemType)i);
-            equipImg[i].sprite = item != null ? item.icon : null;
+            equipItem[i].currentItem.icon = item != null ? item.icon : null;
             //equipImg[i].enabled = item != null;
         }
     }

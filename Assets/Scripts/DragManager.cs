@@ -62,6 +62,9 @@ public class DragManager : MonoBehaviour
         if (originSlot == null || targetSlot == null || originSlot == targetSlot)
             return;
 
+        if (!targetSlot.IsAllow(originSlot.currentItem)||originSlot.IsAllow(targetSlot.currentItem))
+            return;
+            
         var temp = originSlot.currentItem;
         originSlot.SetItem(targetSlot.currentItem);
         targetSlot.SetItem(temp);

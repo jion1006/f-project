@@ -22,6 +22,6 @@ public class EquipItemData : ItemData
 
     int itemCrt;
     int itemCrtdmg;
-
+    int enforce = 0;
 
 }

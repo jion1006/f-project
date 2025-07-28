@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnforceUI : MonoBehaviour
 {
-    public EquipItemData enforceItem;
-
+    public ItemSlotUI enforceItem;
+    private ItemData currentItemData;
     // Start is called before the first frame update
     void Start()
     {
-
+        enforceItem.OnSlotChanged += ChangeEnforeSlot;
     }
 
     // Update is called once per frame
@@ -20,6 +20,11 @@ public class EnforceUI : MonoBehaviour
 
     public void OnClickEnforceButton()
     {
+        
+    }
 
+    public void ChangeEnforeSlot(ItemData itemData)
+    {
+        currentItemData = itemData;
     }
 }

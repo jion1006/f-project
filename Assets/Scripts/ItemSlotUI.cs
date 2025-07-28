@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class ItemSlotUI : MonoBehaviour,
             IPointerEnterHandler, IPointerExitHandler,IBeginDragHandler,
@@ -13,6 +14,10 @@ public class ItemSlotUI : MonoBehaviour,
     public ItemData currentItem;
     public InvenInfoUI theInfo;
 
+    public Action<ItemData> OnSlotChanged;
+
+    public bool restrictByType = false;
+    public ItemType alloweType;
     void Start()
     {
         theInfo = InvenManager.Instance.theInfo;
@@ -22,12 +27,20 @@ public class ItemSlotUI : MonoBehaviour,
     {
         currentItem = _item;
         icon.sprite = currentItem ? currentItem.icon : null;
+        OnSlotChanged.Invoke(_item);
     }
 
     public void Clear()
     {
         currentItem = null;
         icon.sprite = null;
+    }
+
+    public bool IsAllow(ItemData item)
+    {
+        if (item == null) return true;
+        if (!restrictByType) return true;
+        return item.itemType == alloweType;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
