@@ -12,7 +12,7 @@ public class ItemSlotUI : MonoBehaviour,
 {
     public Image icon;
     public ItemData currentItem;
-    public InvenInfoUI theInfo;
+    
 
     public Action<ItemData> OnSlotChanged;
 
@@ -20,14 +20,14 @@ public class ItemSlotUI : MonoBehaviour,
     public ItemType alloweType;
     void Start()
     {
-        theInfo = InvenManager.Instance.theInfo;
+        
     }
 
     public void SetItem(ItemData _item)
     {
         currentItem = _item;
         icon.sprite = currentItem ? currentItem.icon : null;
-        OnSlotChanged.Invoke(_item);
+        OnSlotChanged?.Invoke(_item);
     }
 
     public void Clear()
@@ -45,14 +45,16 @@ public class ItemSlotUI : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+
         if (currentItem == null)
             return;
         DragManager.Instance.StartDrag(this);
+        Debug.Log("감지");
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        DragManager.Instance.UpdateDrag(eventData.position);
+        DragManager.Instance.UpdateDrag(Input.mousePosition);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -69,13 +71,12 @@ public class ItemSlotUI : MonoBehaviour,
     {
         if (currentItem != null)
         {
-            theInfo.SetInfo(currentItem);
-            theInfo.Show(Input.mousePosition);
+            UIManager.Instance.OnTooltipPanel(currentItem,transform.position);
         }
     }
 
     public void OnPointerExit(PointerEventData _eventData)
     {
-        theInfo.Hide();
+        UIManager.Instance.EndTooltip();
     }
 }

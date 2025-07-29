@@ -28,7 +28,7 @@ public class EquipUI : MonoBehaviour
         for (int i = 0; i < equipItem.Length; ++i)
         {
             EquipItemData item = EquipManager.Instance.GetEquipItem((EquipItemType)i);
-            equipItem[i].currentItem.icon = item != null ? item.icon : null;
+            equipItem[i].icon.sprite = item != null ? item.icon : null;
             //equipImg[i].enabled = item != null;
         }
     }

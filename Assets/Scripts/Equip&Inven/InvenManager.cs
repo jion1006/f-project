@@ -11,7 +11,7 @@ public class InvenManager : MonoBehaviour
     
 
     public event Action OnitemChanged;
-    public InvenInfoUI theInfo;
+    
 
     public int slotsize = 40;
 
@@ -57,7 +57,7 @@ public class InvenManager : MonoBehaviour
                 array[i].itemCount++;
             }   
         }
-        OnitemChanged.Invoke();
+        OnitemChanged?.Invoke();
     }
 
     public void ReMove(ItemData _item,int index)

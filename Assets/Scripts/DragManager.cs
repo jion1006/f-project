@@ -7,8 +7,8 @@ public class DragManager : MonoBehaviour
 {
     public static DragManager Instance;
 
-    public GameObject dragUI;
-    public Image dragImage;
+    
+    
     public ItemSlotUI originSlot;
 
     void Awake()
@@ -22,7 +22,7 @@ public class DragManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        dragImage = dragUI.GetComponent<Image>();
+        
 
     }
     // Start is called before the first frame update
@@ -42,18 +42,17 @@ public class DragManager : MonoBehaviour
     public void StartDrag(ItemSlotUI prevSlot)
     {
         originSlot = prevSlot;
-        dragUI.SetActive(true);
-        dragImage.sprite = prevSlot.icon.sprite;
+        UIManager.Instance.OnDragPanel(originSlot.currentItem.icon);
     }
 
     public void UpdateDrag(Vector2 mousePos)
     {
-        dragUI.transform.position = mousePos;
+        UIManager.Instance.Draging(mousePos);
     }
 
     public void EndDrag()
     {
-        dragUI.SetActive(false);
+        UIManager.Instance.EndDrag();
         originSlot = null;
     }
 

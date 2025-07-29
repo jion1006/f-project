@@ -16,12 +16,12 @@ public enum EquipItemType
 public class EquipItemData : ItemData
 {
     public EquipItemType equipType;
-    int itemAtk;
-    int itemDef;
-    int itemHp;
+    public int itemAtk;
+    public int itemDef;
+    public int itemHp;
 
-    int itemCrt;
-    int itemCrtdmg;
-    int enforce = 0;
+    public int itemCrt;
+    public int itemCrtdmg;
+    public int enforce = 0;
 
 }
