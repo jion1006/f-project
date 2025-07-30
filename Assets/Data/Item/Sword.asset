@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 0
   itemName: Sword
   icon: {fileID: -863600368, guid: 85d9f47c8c0cfb94aa58aa865ed7fd70, type: 3}
-  itemID: 0
+  itemID: 101
   itemCount: 1
   description: "\uAE30\uBCF8\uC801\uC778 \uAC80\uC774\uB2E4"
   equipType: 3

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 
 
+
+
 public class InvenUI : MonoBehaviour
 {
     [Serializable]
@@ -77,8 +79,9 @@ public class InvenUI : MonoBehaviour
 
         for (int i = 0; i < array.Length; ++i)
         {
-            if (array[i] != null)
-                invenSlotUIs[i].SetItem(array[i]);
+            //if (array[i] != null)
+            invenSlotUIs[i].SetSlot(InvenManager.Instance, array[i], i);
+            invenSlotUIs[i].currentType = currentType;
         }
 
     }
@@ -90,5 +93,7 @@ public class InvenUI : MonoBehaviour
             PlayerController.Instance.thePS.ChangeState(PlayerStateType.Move);
         });
     }
+
+
     
 }

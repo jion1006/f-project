@@ -20,7 +20,7 @@ public class ItemInfoUI : MonoBehaviour
     public void ShowTooltip(ItemData _item, Vector2 _postion)
     {
         tooltipPanel.SetActive(true);
-        tooltipPanel.transform.position = _postion+new Vector2(100f,-0.5f);
+        tooltipPanel.transform.position = _postion+new Vector2(200f,-100f);
         itemIcon.sprite = _item.icon;
         nameText.text = _item.itemName;
         desctiptText.text = _item.description;

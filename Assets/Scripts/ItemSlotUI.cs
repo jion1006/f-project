@@ -12,9 +12,9 @@ public class ItemSlotUI : MonoBehaviour,
 {
     public Image icon;
     public ItemData currentItem;
-    
-
-    public Action<ItemData> OnSlotChanged;
+    public ItemType currentType;
+    public int index;
+    public IItemContainer itemContainer;
 
     public bool restrictByType = false;
     public ItemType alloweType;
@@ -23,11 +23,21 @@ public class ItemSlotUI : MonoBehaviour,
         
     }
 
-    public void SetItem(ItemData _item)
+    public void SetSlot(IItemContainer _itemContainer,ItemData _item, int _index)
     {
+        itemContainer = _itemContainer;
         currentItem = _item;
+        index = _index;
         icon.sprite = currentItem ? currentItem.icon : null;
-        OnSlotChanged?.Invoke(_item);
+    }
+
+    public ItemData GetItem()
+    {
+        return itemContainer.GetItem(currentType,index);
+    }
+    public void SetItem(ItemData item)
+    {
+        itemContainer.SetItem(currentType, index, item);
     }
 
     public void Clear()
@@ -49,7 +59,7 @@ public class ItemSlotUI : MonoBehaviour,
         if (currentItem == null)
             return;
         DragManager.Instance.StartDrag(this);
-        Debug.Log("감지");
+        icon.sprite = null;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,7 +68,11 @@ public class ItemSlotUI : MonoBehaviour,
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        DragManager.Instance.EndDrag();
+        if (eventData.pointerEnter == null ||
+           eventData.pointerEnter.GetComponent<ItemSlotUI>() == null)
+            DragManager.Instance.CancelDrag();
+        else
+            DragManager.Instance.EndDrag();
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -69,7 +83,7 @@ public class ItemSlotUI : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData _eventData)
     {
-        if (currentItem != null)
+        if (currentItem != null&&!DragManager.Instance.isDrag)
         {
             UIManager.Instance.OnTooltipPanel(currentItem,transform.position);
         }

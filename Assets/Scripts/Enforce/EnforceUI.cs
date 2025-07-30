@@ -5,7 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnforceUI : MonoBehaviour
+public class EnforceUI : MonoBehaviour, IItemContainer
 {
     public GameObject total;
     public ItemSlotUI enforceItem;
@@ -21,7 +21,6 @@ public class EnforceUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enforceItem.OnSlotChanged += ChangeEnforceSlot;
         enforceRate = new Dictionary<int, float>()
         {
             {0,1.00f},
@@ -34,6 +33,8 @@ public class EnforceUI : MonoBehaviour
             {7,0.30f},
             {8,0.20f},
         };
+        enforceItem.currentType = ItemType.Equip;
+        enforceItem.itemContainer = this;
     }
     void OnEnable()
     {
@@ -41,7 +42,7 @@ public class EnforceUI : MonoBehaviour
         for (int i = 0; i < array.Length; ++i)
         {
             if (array[i] != null)
-                itemSlots[i].SetItem(array[i]);
+                itemSlots[i].SetSlot(InvenManager.Instance,array[i], i);
         }
     }
     // Update is called once per frame
@@ -67,20 +68,10 @@ public class EnforceUI : MonoBehaviour
         return ran < successRate;
     }
 
-    public void ChangeEnforceSlot(ItemData itemData)
+    public void ChangeEnforceSlot()
     {
-        EquipItemData equipItem = itemData as EquipItemData;
-
-        if (equipItem != null)
-        {
-            currentItemData = equipItem;
-            RefreshEnforceUI();
-        }
-        else
-        {
-            currentItemData = null;
-        }
-
+        currentItemData = enforceItem.currentItem as EquipItemData;
+        RefreshEnforceUI();
     }
 
     public void RefreshEnforceUI()
@@ -107,5 +98,19 @@ public class EnforceUI : MonoBehaviour
         {
             PlayerController.Instance.thePS.ChangeState(PlayerStateType.Move);
         });
+    }
+
+
+    public ItemData GetItem(ItemType itemType, int index)
+    {
+        return currentItemData;
+    }
+    public void SetItem(ItemType itemType, int index, ItemData item)
+    {
+        currentItemData = item as EquipItemData;
+    }
+    public void ClearItem(ItemType itemType, int index)
+    {
+        currentItemData = null;
     }
 }

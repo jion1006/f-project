@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EquipManager : MonoBehaviour
+public class EquipManager : MonoBehaviour, IItemContainer
 {
     private EquipItemData[] theEq;
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class EquipManager : MonoBehaviour
         if (theEq[(int)_equipItem.equipType] == null)
         {
             theEq[(int)_equipItem.equipType] = _equipItem;
-            OnEquipChange.Invoke();
+            OnEquipChange?.Invoke();
         }
     }
 
@@ -40,12 +40,25 @@ public class EquipManager : MonoBehaviour
     {
         EquipItemData nData = theEq[(int)_equipType];
         theEq[(int)_equipType] = null;
-        OnEquipChange.Invoke();
+        OnEquipChange?.Invoke();
         return nData;
     }
 
-    public EquipItemData GetEquipItem(EquipItemType _equipType)
+
+
+    public ItemData GetItem(ItemType itemType, int index)
     {
-        return theEq[(int)_equipType];
+        return theEq[index];
+    }
+    public void SetItem(ItemType itemType, int index, ItemData item)
+    {
+        theEq[index] = item as EquipItemData;
+        OnEquipChange?.Invoke();
+    }
+
+    public void ClearItem(ItemType itemType, int index)
+    {
+        theEq[index] = null;
+        OnEquipChange.Invoke();
     }
 }

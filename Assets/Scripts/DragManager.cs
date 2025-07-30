@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,10 @@ using UnityEngine.UI;
 
 public class DragManager : MonoBehaviour
 {
-    public static DragManager Instance;
-
-    
-    
+    public static DragManager Instance;    
     public ItemSlotUI originSlot;
 
+    public bool isDrag { get; private set; }
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -42,6 +41,7 @@ public class DragManager : MonoBehaviour
     public void StartDrag(ItemSlotUI prevSlot)
     {
         originSlot = prevSlot;
+        isDrag = true;
         UIManager.Instance.OnDragPanel(originSlot.currentItem.icon);
     }
 
@@ -53,20 +53,40 @@ public class DragManager : MonoBehaviour
     public void EndDrag()
     {
         UIManager.Instance.EndDrag();
+        isDrag = false;
         originSlot = null;
     }
-
+    public void CancelDrag()
+    {
+        UIManager.Instance.EndDrag();
+        isDrag = false;
+        originSlot.icon.sprite = originSlot.currentItem.icon;
+        originSlot = null;
+    }
     public void TrySwapSlot(ItemSlotUI targetSlot)
     {
-        if (originSlot == null || targetSlot == null || originSlot == targetSlot)
-            return;
 
-        if (!targetSlot.IsAllow(originSlot.currentItem)||originSlot.IsAllow(targetSlot.currentItem))
+        if (originSlot == null)
             return;
-            
-        var temp = originSlot.currentItem;
-        originSlot.SetItem(targetSlot.currentItem);
-        targetSlot.SetItem(temp);
+        if (targetSlot == null || originSlot == targetSlot)
+            {
+                originSlot.icon.sprite = originSlot.currentItem.icon;
+                return;
+            }
+
+        var originItem = originSlot.GetItem();
+        var targetItem = targetSlot.GetItem();
+
+        if (!targetSlot.IsAllow(originItem) || !originSlot.IsAllow(targetItem))
+        {
+            originSlot.icon.sprite = originSlot.currentItem.icon;
+            return;
+        }
+
+
+
+        originSlot.SetItem(targetItem);
+        targetSlot.SetItem(originItem);
 
     }
 }
