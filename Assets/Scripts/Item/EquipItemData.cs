@@ -24,4 +24,9 @@ public class EquipItemData : ItemData
     public int itemCrtdmg;
     public int enforce = 0;
 
+    public override void Use()
+    {
+        EquipManager.Instance.Equals(this);
+    }
+
 }

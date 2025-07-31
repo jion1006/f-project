@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 
 
-
-
 public class InvenUI : MonoBehaviour
 {
     [Serializable]

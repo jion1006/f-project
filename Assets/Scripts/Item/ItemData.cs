@@ -20,4 +20,6 @@ public class ItemData : ScriptableObject
     public int itemID;
     public int itemCount;
     public string description;
+
+    public virtual void Use(){}
 }

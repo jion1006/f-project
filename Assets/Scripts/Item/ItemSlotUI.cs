@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 using System;
 
 public class ItemSlotUI : MonoBehaviour,
-            IPointerEnterHandler, IPointerExitHandler,IBeginDragHandler,
-            IEndDragHandler,IDragHandler,IDropHandler
+            IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler,
+            IEndDragHandler, IDragHandler, IDropHandler, IPointerClickHandler
 
 {
     public Image icon;
@@ -20,10 +20,10 @@ public class ItemSlotUI : MonoBehaviour,
     public ItemType alloweType;
     void Start()
     {
-        
+
     }
 
-    public void SetSlot(IItemContainer _itemContainer,ItemData _item, int _index)
+    public void SetSlot(IItemContainer _itemContainer, ItemData _item, int _index)
     {
         itemContainer = _itemContainer;
         currentItem = _item;
@@ -33,7 +33,7 @@ public class ItemSlotUI : MonoBehaviour,
 
     public ItemData GetItem()
     {
-        return itemContainer.GetItem(currentType,index);
+        return itemContainer.GetItem(currentType, index);
     }
     public void SetItem(ItemData item)
     {
@@ -81,16 +81,22 @@ public class ItemSlotUI : MonoBehaviour,
 
 
 
-    public void OnPointerEnter(PointerEventData _eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (currentItem != null&&!DragManager.Instance.isDrag)
+        if (currentItem != null && !DragManager.Instance.isDrag)
         {
-            UIManager.Instance.OnTooltipPanel(currentItem,transform.position);
+            UIManager.Instance.OnTooltipPanel(currentItem, transform.position);
         }
     }
 
-    public void OnPointerExit(PointerEventData _eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
         UIManager.Instance.EndTooltip();
+    }
+
+    public void OnPointerClick(PointerEventData eventaData)
+    {
+        if (eventaData.button == PointerEventData.InputButton.Right||currentItem!=null)
+            currentItem.Use();
     }
 }

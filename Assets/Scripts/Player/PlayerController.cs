@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerStateMachine thePS;
     public static PlayerController Instance;
-    
+
 
     [SerializeField]
     private int currentHp;
     [SerializeField]
     private int currentMp;
+
+    public Action<int, int> OnHealthChanged;
 
     void Awake()
     {
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public void AttackDamaged(int _monAttack)
     {
+
         currentHp -= _monAttack;
         if (currentHp <= 0)
         {
@@ -62,8 +65,16 @@ public class PlayerController : MonoBehaviour
         {
             thePS.ChangeState(PlayerStateType.Damaged);
         }
+        OnHealthChanged?.Invoke(currentHp, playerStat.maxHp);
     }
 
-    
+    public void Heal(int _heal)
+    {
+        currentHp += _heal;
+        if (currentHp > playerStat.maxHp)
+            currentHp = playerStat.maxHp;
+
+        OnHealthChanged?.Invoke(currentHp, playerStat.maxHp);
+    }
 
 }
