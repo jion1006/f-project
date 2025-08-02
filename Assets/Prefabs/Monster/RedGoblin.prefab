@@ -204,6 +204,7 @@ MonoBehaviour:
   monsterStat: {fileID: 0}
   currentHp: 0
   mID: 1
+  hpBar: {fileID: 0}
   mStateMachine: {fileID: 0}
 --- !u!114 &5090591114978928639
 MonoBehaviour:

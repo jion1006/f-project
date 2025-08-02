@@ -24,11 +24,7 @@ public class DungenManager : MonoBehaviour
         theCamera.SetBound(mapList[0].bound);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void MoveToMap(int nextMap)
     {

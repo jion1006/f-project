@@ -7,6 +7,7 @@ public class TargetState : MovingObject, IMonsterState
     public MonsterStateType monsterState => MonsterStateType.Target;
     private MonsterController monsterCT;
     private MonsterStateMachine monsterMC;
+
     float dist = 0f;
     Vector2 dir = Vector2.zero;
     public void Enter(MonsterController theMC, MonsterStateMachine theMS)
@@ -37,15 +38,18 @@ public class TargetState : MovingObject, IMonsterState
             dist = Vector2.Distance(PlayerController.Instance.transform.position, transform.position);
             dir = PlayerController.Instance.transform.position - transform.position;
         }
-        
-       
+
+
         if (dist > monsterCT.DetectRange + 0.5f)
         {
             Stop();
             monsterMC.ChangeState(MonsterStateType.Move);
         }
         else
+        {
+            
             Move(dir);
+        }
 
         if (dist < monsterCT.AttackRange)
             monsterMC.ChangeState(MonsterStateType.Attack);
