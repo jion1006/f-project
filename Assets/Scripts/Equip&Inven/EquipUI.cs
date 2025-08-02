@@ -15,9 +15,9 @@ public class EquipUI : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        foreach (var slot in equipItem)
+        for (int i = 0; i < equipItem.Length; ++i)
         {
-            slot.currentType = ItemType.Equip;
+            equipItem[i].index = i;
         }
     }
     void Update()
@@ -36,7 +36,6 @@ public class EquipUI : MonoBehaviour
         for (int i = 0; i < equipItem.Length; ++i)
         {
             equipItem[i].SetSlot(EquipManager.Instance, EquipManager.Instance.GetItem(ItemType.Equip, i), i);
-            //equipImg[i].enabled = item != null;
         }
     }
 

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf3a8350f98c3b43a67144780a4303e, type: 3}
+  m_Script: {fileID: 11500000, guid: be43a26f2a97b1c43b8ac864fea943e5, type: 3}
   m_Name: SmallPotion
   m_EditorClassIdentifier: 
   itemType: 1
   itemName: SmallPotion
   icon: {fileID: -2041994004, guid: 85d9f47c8c0cfb94aa58aa865ed7fd70, type: 3}
-  itemID: 1
-  itemCount: 1
-  description: "\uCCB4\uB825\uC744 \uC870\uAE08 \uD68C\uBCF5\uC2DC\uCF1C\uC8FC\uB294
-    \uD3EC\uC158\uC774\uB2E4"
+  itemID: 0
+  itemCount: 4
+  description: "\uCCB4\uB825\uC744 \uC870\uAE08 \uD68C\uBCF5 \uC2DC\uCF1C\uC900\uB2E4"
+  healing: 10

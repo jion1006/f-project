@@ -27,21 +27,24 @@ public class EquipManager : MonoBehaviour, IItemContainer
         theEq = new EquipItemData[equipnum];
     }
 
-    void Equip(EquipItemData _equipItem)
+    public void Equip(ItemSlotUI _equipSlot)
     {
-        if (theEq[(int)_equipItem.equipType] == null)
-        {
-            theEq[(int)_equipItem.equipType] = _equipItem;
-            OnEquipChange?.Invoke();
-        }
+        EquipItemData origin = _equipSlot.currentItem as EquipItemData;
+        EquipItemData target = theEq[(int)origin.equipType];
+        if(target!=null)
+            target.isEquip = false;
+        _equipSlot.SetItem(target);
+        SetItem(ItemType.Equip, (int)origin.equipType, origin);
     }
 
-    EquipItemData UnEquip(EquipItemType _equipType)
+    public void UnEquip(EquipItemType _equipType)
     {
         EquipItemData nData = theEq[(int)_equipType];
+        nData.isEquip = false;
         theEq[(int)_equipType] = null;
+        InvenManager.Instance.Add(nData);
         OnEquipChange?.Invoke();
-        return nData;
+        
     }
 
 
@@ -52,7 +55,10 @@ public class EquipManager : MonoBehaviour, IItemContainer
     }
     public void SetItem(ItemType itemType, int index, ItemData item)
     {
-        theEq[index] = item as EquipItemData;
+        EquipItemData set= item as EquipItemData;
+        if(set!=null)
+            set.isEquip = !set.isEquip;
+        theEq[index] = set;
         OnEquipChange?.Invoke();
     }
 

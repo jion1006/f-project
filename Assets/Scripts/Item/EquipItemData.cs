@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum EquipItemType
 {
+    Weapon,
     Head,
     Armor,
     Shoes,
-    Weapon,
     Rings,
     Neckless,
 }
@@ -23,10 +23,13 @@ public class EquipItemData : ItemData
     public int itemCrt;
     public int itemCrtdmg;
     public int enforce = 0;
-
-    public override void Use()
+    public bool isEquip = false;
+    public override void Use(ItemSlotUI slotUI)
     {
-        EquipManager.Instance.Equals(this);
+        if (!isEquip)
+            EquipManager.Instance.Equip(slotUI);
+        else
+            EquipManager.Instance.UnEquip(equipType);
     }
 
 }

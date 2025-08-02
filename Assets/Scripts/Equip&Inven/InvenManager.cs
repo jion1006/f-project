@@ -49,6 +49,16 @@ public class InvenManager : MonoBehaviour, IItemContainer
         {
             Add(prevDatas[i]);
         }
+
+        for (int i = 0; i < slotsize; ++i)
+        {
+            if (theItemL[ItemType.Equip][i] != null)
+            {
+                EquipItemData startEquip = theItemL[ItemType.Equip][i] as EquipItemData;
+                startEquip.isEquip = false;
+                theItemL[ItemType.Equip][i] = startEquip;
+            }
+        }
     }
 
     public void Add(ItemData _item)
@@ -56,17 +66,23 @@ public class InvenManager : MonoBehaviour, IItemContainer
         var array = theItemL[_item.itemType];
         for (int i = 0; i < array.Length; ++i)
         {
+            if (array[i]!=null && array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
+            {
+                array[i].itemCount++;
+                OnitemChanged?.Invoke();
+                return;
+            }
+        }
+        for (int i = 0; i < array.Length; ++i)
+        {
             if (array[i] == null)
             {
                 array[i] = _item;
-                break;
+                OnitemChanged?.Invoke();
+                return;
             }
-            if (array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
-            {
-                array[i].itemCount++;
-            }
+            
         }
-        OnitemChanged?.Invoke();
     }
 
     public ItemData GetItem(ItemType itemType, int index)
@@ -75,8 +91,18 @@ public class InvenManager : MonoBehaviour, IItemContainer
     }
     public void SetItem(ItemType itemType, int index, ItemData item)
     {
-        theItemL[itemType][index] = item;
+        if (item!=null&&itemType == ItemType.Equip)
+        {
+            EquipItemData equip = item as EquipItemData;
+            equip.isEquip = false;
+            theItemL[itemType][index] = equip;
+        }
+        else
+        {
+            theItemL[itemType][index] = item;
+        }
         OnitemChanged?.Invoke();
+
     }
 
     public void ClearItem(ItemType itemType, int index)

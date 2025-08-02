@@ -82,7 +82,7 @@ public class DragManager : MonoBehaviour
             originSlot.icon.sprite = originSlot.currentItem.icon;
             return;
         }
-
+        
 
 
         originSlot.SetItem(targetItem);

@@ -21,5 +21,5 @@ public class ItemData : ScriptableObject
     public int itemCount;
     public string description;
 
-    public virtual void Use(){}
+    public virtual void Use(ItemSlotUI slotUI){}
 }

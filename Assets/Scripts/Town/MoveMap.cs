@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveToShop : MonoBehaviour
+public class MoveMap : MonoBehaviour
 {
-    public GameObject shopSpawn;
-    public BoxCollider2D shopCollider;
+    public GameObject playSpawn;
+    public BoxCollider2D bound;
     public CameraManager cameraManager;
     // Start is called before the first frame update
     void Start()
@@ -22,8 +22,8 @@ public class MoveToShop : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            PlayerController.Instance.transform.position = shopSpawn.transform.position;
-            cameraManager.SetBound(shopCollider);
+            PlayerController.Instance.transform.position = playSpawn.transform.position;
+            cameraManager.SetBound(bound);
         }
     }
 }

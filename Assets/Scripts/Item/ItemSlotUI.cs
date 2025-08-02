@@ -46,7 +46,7 @@ public class ItemSlotUI : MonoBehaviour,
         icon.sprite = null;
     }
 
-    public bool IsAllow(ItemData item)
+    public virtual bool IsAllow(ItemData item)
     {
         if (item == null) return true;
         if (!restrictByType) return true;
@@ -96,7 +96,10 @@ public class ItemSlotUI : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventaData)
     {
-        if (eventaData.button == PointerEventData.InputButton.Right||currentItem!=null)
-            currentItem.Use();
+        if (eventaData.button == PointerEventData.InputButton.Right && currentItem != null)
+        {
+            currentItem.Use(this);
+            
+        }
     }
 }
