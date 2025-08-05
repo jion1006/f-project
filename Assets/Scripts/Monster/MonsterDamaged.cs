@@ -12,33 +12,23 @@ public class MonsterDamaged : MonoBehaviour, IMonsterState
     void Start()
     {
         animator = GetComponent<Animator>();
-        
     }
 
     public void Enter(MonsterController theMC, MonsterStateMachine theMS)
     {
         monsterSM = theMS;
-        animator.CrossFade("Damaged Tree",0.05f);
-
-        
-        
+        animator.CrossFade("Damaged Tree", 0.05f);
     }
 
     public void Exit()
     {
-        
+
     }
 
 
-    public void SUpdate()
+    
+    public void ExitDamamged()
     {
-        var anim = animator.GetCurrentAnimatorStateInfo(0);
-        if (anim.IsName("Damaged Tree"))
-        {
-            if (anim.normalizedTime > 0.8f)
-            {
-                monsterSM.ChangeState(MonsterStateType.Move);
-            }
-        }
+        monsterSM.ChangeState(MonsterStateType.Move);
     }
 }

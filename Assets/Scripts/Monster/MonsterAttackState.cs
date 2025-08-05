@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAttackState : MonoBehaviour,IMonsterState
+public class MonsterAttackState : MonoBehaviour, IMonsterState
 {
     public MonsterStateType monsterState => MonsterStateType.Attack;
     private Animator animator;
@@ -22,7 +22,7 @@ public class MonsterAttackState : MonoBehaviour,IMonsterState
     }
     public void Exit()
     {
-        atkColl.enabled=false;
+        atkColl.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -30,22 +30,11 @@ public class MonsterAttackState : MonoBehaviour,IMonsterState
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
-        
+
     }
 
-    // Update is called once per frame
-    public void SUpdate()
+    public void ExitAttack()
     {
-        if (monsterMS.IsNotCurrent(monsterState))
-            return;
-
-        var anime = animator.GetCurrentAnimatorStateInfo(0);
-        
-        if (anime.IsName("Attack Tree"))
-        {
-            if (anime.normalizedTime > 0.9f)
-                monsterMS.ChangeState(MonsterStateType.Move);
-
-        }
+        monsterMS.ChangeState(MonsterStateType.Move);
     }
 }

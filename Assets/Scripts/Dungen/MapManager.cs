@@ -5,36 +5,34 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public List<GameObject> monsterL;
-    public List<BoxCollider2D> portalOns;
+    public List<GameObject> portalOns;
     public BoxCollider2D bound;
+    int monsterCount = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+        monsterCount = monsterL.Count;
+        foreach (var monObj in monsterL)
+        {
+            if (monObj.TryGetComponent<MonsterDead>(out var mon))
+                mon.OnDeadEvent += CheckAllMonsterDIE;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        monsterL.RemoveAll(m => m == null);
-        if(portalOns.Count!=0)
-            CheckAllMonsterDIE();
-    }
+
 
     void CheckAllMonsterDIE()
     {
-        if (monsterL.Count == 0)
+
+        monsterCount--;
+        if (monsterCount <= 0)
         {
             foreach (var potal in portalOns)
             {
-                potal.enabled = true;
+                if (potal.TryGetComponent<Portal>(out var por))
+                    por.OnPortal();
             }
         }
-        else
-            foreach (var potal in portalOns)
-            {
-                potal.enabled = false;
-            }
-
     }
+        
 }

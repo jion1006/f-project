@@ -17,11 +17,7 @@ public class MonsterHpBar : MonoBehaviour
         hpSlider = GetComponent<Slider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void SetTarget(MonsterController _monster)
     {
         monster = _monster;

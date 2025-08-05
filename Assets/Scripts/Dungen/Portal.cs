@@ -10,16 +10,13 @@ public class Portal : MonoBehaviour
     [SerializeField]
     private int nextMap;
     Camera cam;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    public BoxCollider2D thisPotal;
+    public GameObject portalOn;
     void Start()
     {
         cam = Camera.main;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +35,12 @@ public class Portal : MonoBehaviour
         cam.transform.position = nextMove.transform.position;
         yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(GameManager.Instance.FadeInScreen());
+    }
+
+    public void OnPortal()
+    {
+        thisPotal.enabled = true;
+        portalOn.SetActive(true);
     }
 
 }

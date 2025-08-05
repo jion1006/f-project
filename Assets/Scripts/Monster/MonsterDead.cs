@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class MonsterDead : MonoBehaviour, IMonsterState
 {
     public MonsterStateType monsterState => MonsterStateType.Dead;
     private Animator animator;
+
+    public event Action OnDeadEvent;
 
     void Start()
     {
@@ -19,14 +22,11 @@ public class MonsterDead : MonoBehaviour, IMonsterState
        
     }
 
-    // Update is called once per frame
-    public void SUpdate()
-    {
-       
-    }
+
 
     public void OnDead()
     {
+        OnDeadEvent?.Invoke();
         Destroy(gameObject);
     }
 

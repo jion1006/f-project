@@ -19,10 +19,7 @@ public class MonsterMove : MovingObject, IMonsterState
         stateMachine = theMS;
         StartCoroutine(StartMove());
     }
-    public void SUpdate()
-    {
-
-    }
+    
 
     IEnumerator StartMove()
     {

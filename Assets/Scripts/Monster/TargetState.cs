@@ -14,45 +14,44 @@ public class TargetState : MovingObject, IMonsterState
     {
         monsterCT = theMC;
         monsterMC = theMS;
-
+        StartCoroutine(StartTarget());
 
     }
 
     public void Exit()
     {
         Stop();
+        StopCoroutine(StartTarget());
     }
-
-
-    // Start is called before the first frame update
-    void Start()
+    
+    IEnumerator StartTarget()
     {
+        while (true)
+        {
+            if (PlayerController.Instance)
+            {
+                dist = Vector2.Distance(PlayerController.Instance.transform.position, transform.position);
+                dir = PlayerController.Instance.transform.position - transform.position;
+            }
+            if (dist > monsterCT.DetectRange + 0.5f)
+            {
+                Stop();
+                monsterMC.ChangeState(MonsterStateType.Move);
+                break;
+            }
+            else
+            {
+                Move(dir);
+            }
 
+            if (dist < monsterCT.AttackRange)
+            {
+                monsterMC.ChangeState(MonsterStateType.Attack);
+                break;
+            }
+            yield return null;
+        }
     }
 
-    // Update is called once per frame
-    public void SUpdate()
-    {
-        if (PlayerController.Instance)
-        {
-            dist = Vector2.Distance(PlayerController.Instance.transform.position, transform.position);
-            dir = PlayerController.Instance.transform.position - transform.position;
-        }
-
-
-        if (dist > monsterCT.DetectRange + 0.5f)
-        {
-            Stop();
-            monsterMC.ChangeState(MonsterStateType.Move);
-        }
-        else
-        {
-            
-            Move(dir);
-        }
-
-        if (dist < monsterCT.AttackRange)
-            monsterMC.ChangeState(MonsterStateType.Attack);
-    }
-
+    
 }

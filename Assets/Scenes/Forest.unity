@@ -1108,9 +1108,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 541447804}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &541447806 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5273549268896184944, guid: a8b201c41906c6644b215e92e3a5dbeb,
+--- !u!1 &541447806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5273549268896184959, guid: a8b201c41906c6644b215e92e3a5dbeb,
     type: 3}
   m_PrefabInstance: {fileID: 541447804}
   m_PrefabAsset: {fileID: 0}
@@ -6902,6 +6902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgText: {fileID: 934566859}
+  offset: {x: 0, y: 3, z: 0}
 --- !u!1 &948294208
 GameObject:
   m_ObjectHideFlags: 0
@@ -7817,6 +7818,12 @@ PrefabInstance:
 --- !u!4 &1319342123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5273549268896184946, guid: a8b201c41906c6644b215e92e3a5dbeb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1319342122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1319342124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5273549268896184959, guid: a8b201c41906c6644b215e92e3a5dbeb,
     type: 3}
   m_PrefabInstance: {fileID: 1319342122}
   m_PrefabAsset: {fileID: 0}
@@ -19500,9 +19507,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2011166192}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &2011166194 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5273549268896184944, guid: a8b201c41906c6644b215e92e3a5dbeb,
+--- !u!1 &2011166194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5273549268896184959, guid: a8b201c41906c6644b215e92e3a5dbeb,
     type: 3}
   m_PrefabInstance: {fileID: 2011166192}
   m_PrefabAsset: {fileID: 0}
@@ -19845,7 +19852,7 @@ MonoBehaviour:
   - {fileID: 181860194}
   portalOns:
   - {fileID: 541447806}
-  - {fileID: 541447806}
+  - {fileID: 1319342124}
   bound: {fileID: 2132891816}
 --- !u!61 &2132891816
 BoxCollider2D:
@@ -19963,9 +19970,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5273549269464117432}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &5273549269464117434 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5273549268896184944, guid: a8b201c41906c6644b215e92e3a5dbeb,
+--- !u!1 &5273549269464117434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5273549268896184959, guid: a8b201c41906c6644b215e92e3a5dbeb,
     type: 3}
   m_PrefabInstance: {fileID: 5273549269464117432}
   m_PrefabAsset: {fileID: 0}

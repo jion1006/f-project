@@ -16,9 +16,9 @@ public interface IMonsterState
 {
     MonsterStateType monsterState { get; }
     void Enter(MonsterController theMC, MonsterStateMachine theMS);
-    void SUpdate();
     void Exit();
 }
+
 
 [Serializable]
 public class MonsterStateEntry
@@ -61,11 +61,7 @@ public class MonsterStateMachine : MonoBehaviour
         Debug.Log("몬스터 초기화");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        currentState.SUpdate();
-    }
+    
 
     public void ChangeState(MonsterStateType _monsterState)
     {
@@ -75,9 +71,6 @@ public class MonsterStateMachine : MonoBehaviour
         currentState.Enter(monsterController, this);
     }
 
-    public bool IsNotCurrent(MonsterStateType _state)
-    {
-        return currentType != _state;
-    }
+    
 
 }
