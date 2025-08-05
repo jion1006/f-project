@@ -15,5 +15,21 @@ public class HealingItemData : ItemData
         {
             slotUI.SetItem(null);
         }
+        else
+            slotUI.SetItem(this);
+    }
+
+    public override ItemData Clone()
+    {
+        HealingItemData item = ScriptableObject.CreateInstance<HealingItemData>();
+        item.itemType = itemType;
+        item.itemName = itemName;
+        item.icon = icon;
+        item.itemID = itemID;
+        item.itemCount = itemCount;
+        item.description = description;
+
+        item.healing = healing;
+        return item;
     }
 }

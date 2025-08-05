@@ -52,6 +52,8 @@ public class DragManager : MonoBehaviour
 
     public void EndDrag()
     {
+        if (!isDrag)
+            return;
         UIManager.Instance.EndDrag();
         isDrag = false;
         originSlot = null;
@@ -59,6 +61,8 @@ public class DragManager : MonoBehaviour
     public void CancelDrag()
     {
         UIManager.Instance.EndDrag();
+        if (originSlot == null || originSlot.currentItem == null)
+            return;
         isDrag = false;
         originSlot.icon.sprite = originSlot.currentItem.icon;
         originSlot = null;
@@ -68,12 +72,11 @@ public class DragManager : MonoBehaviour
 
         if (originSlot == null)
             return;
-        if (targetSlot == null || originSlot == targetSlot)
+        if (targetSlot == null || originSlot == targetSlot|| originSlot == null)
             {
-                originSlot.icon.sprite = originSlot.currentItem.icon;
+                originSlot.icon.sprite = originSlot.currentItem ? originSlot.currentItem.icon : null;
                 return;
             }
-
         var originItem = originSlot.GetItem();
         var targetItem = targetSlot.GetItem();
 
@@ -82,8 +85,9 @@ public class DragManager : MonoBehaviour
             originSlot.icon.sprite = originSlot.currentItem.icon;
             return;
         }
-        
 
+
+        Debug.Log("떨굼");
 
         originSlot.SetItem(targetItem);
         targetSlot.SetItem(originItem);

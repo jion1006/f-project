@@ -9,12 +9,12 @@ public class PoolManager : MonoBehaviour
     public Canvas poolCanvas;
 
     public GameObject monHPbar;
-    //public GameObject damageText;
+    public GameObject damageText;
 
     public int poolSize = 20;
 
     private Queue<GameObject> hpbarPool = new Queue<GameObject>();
-    //private Queue<GameObject> damamgePool = new Queue<GameObject>();
+    private Queue<GameObject> damamgePool = new Queue<GameObject>();
     void Awake()
     {
         Instance = this;
@@ -25,9 +25,9 @@ public class PoolManager : MonoBehaviour
             monbar.SetActive(false);
             hpbarPool.Enqueue(monbar);
 
-            //var damage = Instantiate(damageText, poolCanvas.transform);
-            //damage.SetActive(false);
-            //damamgePool.Enqueue(damage);
+            var damage = Instantiate(damageText, poolCanvas.transform);
+            damage.SetActive(false);
+            damamgePool.Enqueue(damage);
         }
 
     }
@@ -52,7 +52,7 @@ public class PoolManager : MonoBehaviour
         hpbarPool.Enqueue(bar);
     }
 
-    /*public GameObject GetDamageT()
+    public GameObject GetDamageT()
     {
         GameObject dText;
         if (damamgePool.Count > 0)
@@ -62,11 +62,11 @@ public class PoolManager : MonoBehaviour
 
         dText.SetActive(true);
         return dText;
-    }*/
+    }
 
-    /*public void ReturnDText(GameObject dText)
+    public void ReturnDText(GameObject dText)
     {
         dText.SetActive(false);
         damamgePool.Enqueue(dText);
-    }*/
+    }
 }

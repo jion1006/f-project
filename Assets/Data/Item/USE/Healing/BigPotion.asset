@@ -16,6 +16,6 @@ MonoBehaviour:
   itemName: BigPotion
   icon: {fileID: -1369130261, guid: 85d9f47c8c0cfb94aa58aa865ed7fd70, type: 3}
   itemID: 1
-  itemCount: 0
+  itemCount: 1
   description: "\uCCB4\uB825\uC744 \uB354 \uB9CE\uC774 \uD68C\uBCF5 \uC2DC\uCF1C\uC900\uB2E4"
   healing: 20

@@ -5,45 +5,35 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnforceUI : MonoBehaviour, IItemContainer
+public class EnforceUI : MonoBehaviour
 {
     public GameObject total;
-    public ItemSlotUI enforceItem;
-    private EquipItemData currentItemData;
 
-    Dictionary<int, float> enforceRate;
-    private float successRate;
+    public ItemSlotUI enforceSlot;
+
+    public List<ItemSlotUI> itemSlots;
+
     private int currentLevel;
     public TextMeshProUGUI enforceText;
 
-    public List<ItemSlotUI> itemSlots;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        enforceRate = new Dictionary<int, float>()
-        {
-            {0,1.00f},
-            {1,0.90f},
-            {2,0.80f},
-            {3,0.70f},
-            {4,0.60f},
-            {5,0.50f},
-            {6,0.40f},
-            {7,0.30f},
-            {8,0.20f},
-        };
-        enforceItem.currentType = ItemType.Equip;
-        enforceItem.itemContainer = this;
+    
     }
     void OnEnable()
     {
-        var array = InvenManager.Instance.GetItemArray(ItemType.Equip);
-        for (int i = 0; i < array.Length; ++i)
-        {
-            if (array[i] != null)
-                itemSlots[i].SetSlot(InvenManager.Instance,array[i], i);
-        }
+        EnforceManager.Instance.itemChange += RefreshEnforceUI;
+        InvenManager.Instance.OnitemChanged += RefreshEnforceUI;
+        RefreshEnforceUI();
+    }
+    void OnDisable()
+    {
+        EnforceManager.Instance.itemChange -= RefreshEnforceUI;
+        InvenManager.Instance.OnitemChanged -= RefreshEnforceUI;
+
     }
     // Update is called once per frame
     void Update()
@@ -54,45 +44,42 @@ public class EnforceUI : MonoBehaviour, IItemContainer
 
     public void OnClickEnforceButton()
     {
-        if (TryEnforce())
-        {
-            currentItemData.enforce += 1;
-        }
 
-        RefreshEnforceUI();
+        EnforceManager.Instance.TryEnforce();
     }
 
-    bool TryEnforce()
-    {
-        float ran = Random.Range(0f, 1f);
-        return ran < successRate;
-    }
+    
 
-    public void ChangeEnforceSlot()
-    {
-        currentItemData = enforceItem.currentItem as EquipItemData;
-        RefreshEnforceUI();
-    }
+    
 
     public void RefreshEnforceUI()
     {
-        currentLevel = currentItemData.enforce;
-        successRate = enforceRate[currentLevel];
-        if (currentItemData != null)
+        EquipItemData itemData = EnforceManager.Instance.GetItem(ItemType.Equip, 0) as EquipItemData;
+        enforceSlot.SetSlot(EnforceManager.Instance, itemData, 0);
+        if (itemData != null)
         {
+            currentLevel = itemData.enforce;
+            float successRate = EnforceManager.Instance.enforceRate[currentLevel];
             int percent = Mathf.RoundToInt(successRate * 100f);
-            enforceText.text = $"현재 강화 : {currentLevel} 강화 확률 : {percent}%";
+            enforceText.text = $"현재 강화 : {currentLevel}\n강화 확률 : {percent}%";
         }
         else
         {
             enforceText.text = "";
         }
+
+        var array = InvenManager.Instance.GetItemArray(ItemType.Equip);
+
+        for (int i = 0; i < array.Length; ++i)
+        {
+            itemSlots[i].SetSlot(InvenManager.Instance, array[i], i);
+            itemSlots[i].currentType = ItemType.Equip;
+        }
     }
 
     public void OnEndEnforceUI()
     {
-        InvenManager.Instance.Add(currentItemData);
-        currentItemData = null;
+        EnforceManager.Instance.OnEndEnforce();
         RefreshEnforceUI();
         UIManager.Instance.CloseUI(total, () =>
         {
@@ -101,16 +88,6 @@ public class EnforceUI : MonoBehaviour, IItemContainer
     }
 
 
-    public ItemData GetItem(ItemType itemType, int index)
-    {
-        return currentItemData;
-    }
-    public void SetItem(ItemType itemType, int index, ItemData item)
-    {
-        currentItemData = item as EquipItemData;
-    }
-    public void ClearItem(ItemType itemType, int index)
-    {
-        currentItemData = null;
-    }
+    
+    
 }

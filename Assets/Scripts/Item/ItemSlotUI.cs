@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 public class ItemSlotUI : MonoBehaviour,
             IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler,
@@ -15,12 +16,14 @@ public class ItemSlotUI : MonoBehaviour,
     public ItemType currentType;
     public int index;
     public IItemContainer itemContainer;
+    public TextMeshProUGUI countUI;
 
     public bool restrictByType = false;
     public ItemType alloweType;
+    public bool isUse = true;
     void Start()
     {
-
+        
     }
 
     public void SetSlot(IItemContainer _itemContainer, ItemData _item, int _index)
@@ -29,6 +32,18 @@ public class ItemSlotUI : MonoBehaviour,
         currentItem = _item;
         index = _index;
         icon.sprite = currentItem ? currentItem.icon : null;
+        if (currentItem != null)
+        {
+            if (currentType == ItemType.Equip)
+            {
+                EquipItemData equip = currentItem as EquipItemData;
+                countUI.text = equip.enforce > 0 ? "+" + equip.enforce.ToString() : "";
+            }
+            else
+            {
+                countUI.text = currentItem.itemCount > 1 ? currentItem.itemCount.ToString() : "";
+            }
+        }
     }
 
     public ItemData GetItem()
@@ -69,7 +84,7 @@ public class ItemSlotUI : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         if (eventData.pointerEnter == null ||
-           eventData.pointerEnter.GetComponent<ItemSlotUI>() == null)
+            eventData.pointerEnter.GetComponent<ItemSlotUI>() == null)
             DragManager.Instance.CancelDrag();
         else
             DragManager.Instance.EndDrag();
@@ -96,7 +111,7 @@ public class ItemSlotUI : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventaData)
     {
-        if (eventaData.button == PointerEventData.InputButton.Right && currentItem != null)
+        if (eventaData.button == PointerEventData.InputButton.Right && currentItem != null&&isUse)
         {
             currentItem.Use(this);
             

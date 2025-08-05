@@ -47,7 +47,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
         }
         for (int i = 0; i < prevDatas.Count; ++i)
         {
-            Add(prevDatas[i]);
+            Add(prevDatas[i].Clone());
         }
 
         for (int i = 0; i < slotsize; ++i)

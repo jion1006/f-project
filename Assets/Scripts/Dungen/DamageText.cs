@@ -7,16 +7,16 @@ public class DamageText : MonoBehaviour
 {
     public TextMeshProUGUI dmgText;
 
+    public Vector3 offset = new Vector3(0, 3f, 0);
     // Start is called before the first frame update
     void Start()
     {
-        dmgText = GetComponent<TextMeshProUGUI>();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetTransform(Vector3 _positon, int dmg)
     {
-        
+        transform.position = _positon+offset;
+        dmgText.text = dmg.ToString();
     }
 }

@@ -20,8 +20,6 @@ public class EquipItemData : ItemData
     public int itemDef;
     public int itemHp;
 
-    public int itemCrt;
-    public int itemCrtdmg;
     public int enforce = 0;
     public bool isEquip = false;
     public override void Use(ItemSlotUI slotUI)
@@ -30,6 +28,26 @@ public class EquipItemData : ItemData
             EquipManager.Instance.Equip(slotUI);
         else
             EquipManager.Instance.UnEquip(equipType);
+    }
+
+    public override ItemData Clone()
+    {
+        EquipItemData item = ScriptableObject.CreateInstance<EquipItemData>();
+        item.itemType = itemType;
+        item.itemName = itemName;
+        item.icon = icon;
+        item.itemID = itemID;
+        item.itemCount = itemCount;
+        item.description = description;
+
+        item.equipType = equipType;
+        item.itemAtk = itemAtk;
+        item.itemDef = itemDef;
+        item.itemHp = itemHp;
+
+        item.enforce = enforce;
+        item.isEquip = isEquip;
+        return item;
     }
 
 }

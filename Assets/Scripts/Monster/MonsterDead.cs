@@ -22,17 +22,13 @@ public class MonsterDead : MonoBehaviour, IMonsterState
     // Update is called once per frame
     public void SUpdate()
     {
-        var anim = animator.GetCurrentAnimatorStateInfo(0);
-
-        if (anim.IsName("Dead"))
-        {
-            if (anim.normalizedTime > 0.9f)
-            {
-                Destroy(gameObject);
-            }
-        }
+       
     }
 
+    public void OnDead()
+    {
+        Destroy(gameObject);
+    }
 
     public void Exit()
     {

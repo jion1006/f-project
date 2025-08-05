@@ -78,8 +78,8 @@ public class InvenUI : MonoBehaviour
         for (int i = 0; i < array.Length; ++i)
         {
             //if (array[i] != null)
-            invenSlotUIs[i].SetSlot(InvenManager.Instance, array[i], i);
             invenSlotUIs[i].currentType = currentType;
+            invenSlotUIs[i].SetSlot(InvenManager.Instance, array[i], i);
         }
 
     }

@@ -7,7 +7,7 @@ public class EquipSlotUI : ItemSlotUI
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public override bool IsAllow(ItemData item)
@@ -19,9 +19,6 @@ public class EquipSlotUI : ItemSlotUI
         EquipItemData target = item as EquipItemData;
         return index == (int)target.equipType;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    
 }
