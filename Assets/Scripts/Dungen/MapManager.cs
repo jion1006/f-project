@@ -7,7 +7,7 @@ public class MapManager : MonoBehaviour
     public List<GameObject> monsterL;
     public List<GameObject> portalOns;
     public BoxCollider2D bound;
-    int monsterCount = 0;
+    public int monsterCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class MapManager : MonoBehaviour
 
 
 
-    void CheckAllMonsterDIE()
+    public virtual void CheckAllMonsterDIE()
     {
 
         monsterCount--;
