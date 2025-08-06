@@ -58,7 +58,7 @@ public class DataManager : MonoBehaviour
     {
         var item = DItem[_id];
         if (item != null)
-            return item;
+            return item.Clone();
         return null;
     }
 }

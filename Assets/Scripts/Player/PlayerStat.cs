@@ -10,8 +10,9 @@ public class PlayerStat
 
     public int atk;
     public int def;
-    public int crt;
-    public int crtdmg;
+
+    public int maxExp;
+    public int level;
 
     public int coin;
 

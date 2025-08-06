@@ -17,7 +17,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
 
     public static InvenManager Instance;
     public List<ItemData> prevDatas;
-    
+
     public event Action OnitemChanged;
 
 
@@ -66,7 +66,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
         var array = theItemL[_item.itemType];
         for (int i = 0; i < array.Length; ++i)
         {
-            if (array[i]!=null && array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
+            if (array[i] != null && array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
             {
                 array[i].itemCount++;
                 OnitemChanged?.Invoke();
@@ -81,7 +81,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
                 OnitemChanged?.Invoke();
                 return;
             }
-            
+
         }
     }
 
@@ -91,7 +91,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
     }
     public void SetItem(ItemType itemType, int index, ItemData item)
     {
-        if (item!=null&&itemType == ItemType.Equip)
+        if (item != null && itemType == ItemType.Equip)
         {
             EquipItemData equip = item as EquipItemData;
             equip.isEquip = false;
@@ -115,5 +115,22 @@ public class InvenManager : MonoBehaviour, IItemContainer
     {
 
         return theItemL[_itemType];
+    }
+
+    public Dictionary<ItemType, ItemData[]> GetAll()
+    {
+        return theItemL;
+    }
+
+    public void ClearAll()
+    {
+        foreach (var itemL in theItemL)
+        {
+            ItemData[] items = itemL.Value;
+            for (int i = 0; i < items.Length; ++i)
+            {
+                items[i] = null;
+            }
+        }
     }
 }
