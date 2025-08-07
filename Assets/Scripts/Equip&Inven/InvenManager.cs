@@ -16,7 +16,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
     private Dictionary<ItemType, ItemData[]> theItemL;
 
     public static InvenManager Instance;
-    public List<ItemData> prevDatas;
+    public List<int> prevDatas;
 
     public event Action OnitemChanged;
 
@@ -47,7 +47,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
         }
         for (int i = 0; i < prevDatas.Count; ++i)
         {
-            Add(prevDatas[i].Clone());
+            Add(DataManager.Instance.GetItem(prevDatas[i]));
         }
 
         for (int i = 0; i < slotsize; ++i)

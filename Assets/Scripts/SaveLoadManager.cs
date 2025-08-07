@@ -31,7 +31,9 @@ public class EquipSaveData
 public class SaveLoadManager : MonoBehaviour
 {
     public static SaveLoadManager Instance;
+    public bool isLoad = false;
 
+    public SaveData load;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -108,33 +110,12 @@ public class SaveLoadManager : MonoBehaviour
             return;
 
         string json = File.ReadAllText(path);
-        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        load = JsonUtility.FromJson<SaveData>(json);
 
-        PlayerStat stat = PlayerController.Instance.playerStat;
-        stat.maxHp = data.playerStat.maxHp;
-        stat.maxMp = data.playerStat.maxMp;
-        stat.maxExp = data.playerStat.maxExp;
-        stat.atk = data.playerStat.atk;
-        stat.def = data.playerStat.def;
-        stat.level = data.playerStat.level;
-
-        InvenManager.Instance.ClearAll();
-        foreach (var items in data.itemSave)
-        {
-            ItemData item = DataManager.Instance.GetItem(items.itemID);
-            item.itemCount = items.itemCount;
-            InvenManager.Instance.SetItem(item.itemType, items.index, item);
-        }
-
-        EquipManager.Instance.ClearAll();
-        foreach (var equips in data.equipSave)
-        {
-            EquipItemData equip = DataManager.Instance.GetItem(equips.itemID) as EquipItemData;
-            equip.enforce = equips.enforce;
-            equip.isEquip = true;
-            EquipManager.Instance.SetItem(ItemType.Equip, (int)equip.equipType, equip);
-        }
-
-
+        
+        
+        
+        isLoad = true;
+        GameManager.Instance.ChangeScene("TownScene");
     }
 }

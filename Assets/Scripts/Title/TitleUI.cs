@@ -17,7 +17,7 @@ public class TitleUI : MonoBehaviour
 
     public void OnClickLoad()
     {
-
+        SaveLoadManager.Instance.Load();
     }
 
     public void OnClickOption()

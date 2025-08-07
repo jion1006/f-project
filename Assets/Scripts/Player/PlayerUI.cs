@@ -23,6 +23,7 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         PlayerController.Instance.OnHealthChanged += HPbarUpdate;
+        PlayerController.Instance.OnExpChanged += ExpbarUPdate;
         hpBar.value = 1f;
         mpBar.value = 1f;
     }

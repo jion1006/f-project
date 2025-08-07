@@ -22,11 +22,29 @@ public class InTown : MonoBehaviour
 
         townBound = GetComponent<BoxCollider2D>();
         cameraManager.SetBound(townBound);
+        if (SaveLoadManager.Instance.isLoad)
+            IsLoding();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IsLoding()
     {
-        
+        SaveData data = SaveLoadManager.Instance.load;
+        InvenManager.Instance.ClearAll();
+        foreach (var items in data.itemSave)
+        {
+            ItemData item = DataManager.Instance.GetItem(items.itemID);
+            item.itemCount = items.itemCount;
+            InvenManager.Instance.SetItem(item.itemType, items.index, item);
+        }
+
+        EquipManager.Instance.ClearAll();
+        foreach (var equips in data.equipSave)
+        {
+            EquipItemData equip = DataManager.Instance.GetItem(equips.itemID) as EquipItemData;
+            equip.enforce = equips.enforce;
+            equip.isEquip = true;
+            EquipManager.Instance.SetItem(ItemType.Equip, (int)equip.equipType, equip);
+        }
+
     }
 }

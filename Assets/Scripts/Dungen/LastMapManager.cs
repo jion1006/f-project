@@ -18,6 +18,7 @@ public class LastMapManager : MapManager
                     por.OnPortal();
             }
             returnUI.SetActive(true);
+            SaveLoadManager.Instance.Save();
         }
     }
 }
