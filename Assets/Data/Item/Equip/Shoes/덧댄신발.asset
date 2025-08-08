@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841dfed54c4f3434dbcc33c34ae535c8, type: 3}
+  m_Name: "\uB367\uB304\uC2E0\uBC1C"
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: "\uB367\uB304\uC2E0\uBC1C"
+  icon: {fileID: -1121013036, guid: 85d9f47c8c0cfb94aa58aa865ed7fd70, type: 3}
+  itemID: 401
+  itemCount: 1
+  description: "\uAC15\uCCA0\uC758 \uB367\uB300 \uBC29\uC5B4\uB825\uC774 \uC870\uAE08
+    \uC62C\uB790\uB2E4"
+  equipType: 3
+  itemAtk: 0
+  itemDef: 3
+  itemHp: 0
+  enforce: 0
+  isEquip: 0

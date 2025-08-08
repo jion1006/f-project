@@ -2478,7 +2478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28f73e32d4af64ea304b0004038f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevDatas: 0000000064000000
+  prevDatas: 0000000064000000c80000002c01000090010000f401000058020000
   slotsize: 40
 --- !u!114 &1003818076
 MonoBehaviour:
@@ -2636,6 +2636,15 @@ MonoBehaviour:
   LItem:
   - {fileID: 11400000, guid: d34b6159b80a00247b357d10be8dbe5e, type: 2}
   - {fileID: 11400000, guid: a486c4c24341cab459a25a025c84fa81, type: 2}
+  - {fileID: 11400000, guid: dc1d4585f39c6ad43a0ede6f57906901, type: 2}
+  - {fileID: 11400000, guid: 3537ee68e30473047b155d3fd3839b40, type: 2}
+  - {fileID: 11400000, guid: 9a878c17c9715fb4399dce36addb2170, type: 2}
+  - {fileID: 11400000, guid: afd123db5749b3d47a79ea9224c2fccd, type: 2}
+  - {fileID: 11400000, guid: 86578a9a18f74ce4d8363992a132a559, type: 2}
+  - {fileID: 11400000, guid: 05c8d71555bda1d409bd38b8f85f20a2, type: 2}
+  - {fileID: 11400000, guid: 743faa81ed27bdd40875a2aee8690426, type: 2}
+  - {fileID: 11400000, guid: 54e983d462e979348a52dbaa0e46a534, type: 2}
+  - {fileID: 11400000, guid: c7bec5e7cb9a7f74db3d946f1a5e3b51, type: 2}
   playerStat:
     maxHp: 100
     maxMp: 100

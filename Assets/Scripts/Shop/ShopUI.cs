@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [Serializable]
@@ -18,7 +19,7 @@ public class ShopUI : MonoBehaviour
     public List<ShopSlotUI> shopSlotUIs;
     public GameObject total;
     public GameObject error;
-
+    public TextMeshProUGUI coinText;
     // Start is called before the first frame update
     void Start()
     {
