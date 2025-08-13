@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,7 @@ public class InvenUI : MonoBehaviour
     public GameObject total;
     private ItemType currentType;
 
+    public TextMeshProUGUI coinText;
     void Start()
     {
         foreach (var tab in invenTab)
@@ -80,8 +82,10 @@ public class InvenUI : MonoBehaviour
             //if (array[i] != null)
             invenSlotUIs[i].currentType = currentType;
             invenSlotUIs[i].SetSlot(InvenManager.Instance, array[i], i);
+            if (array[i] != null)
+                invenSlotUIs[i].icon.color = new Color(1f, 1f, 1f, 1f);
         }
-
+        coinText.text = PlayerController.Instance.playerStat.coin.ToString();
     }
 
     public void OnCloseButton()

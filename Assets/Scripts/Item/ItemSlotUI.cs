@@ -32,6 +32,7 @@ public class ItemSlotUI : MonoBehaviour,
         currentItem = _item;
         index = _index;
         icon.sprite = currentItem ? currentItem.icon : null;
+        icon.color = currentItem ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0);
         if (currentItem != null)
         {
             if (currentType == ItemType.Equip)
@@ -44,6 +45,8 @@ public class ItemSlotUI : MonoBehaviour,
                 countUI.text = currentItem.itemCount > 1 ? currentItem.itemCount.ToString() : "";
             }
         }
+        else
+            countUI.text = "";
     }
 
     public ItemData GetItem()
@@ -59,6 +62,7 @@ public class ItemSlotUI : MonoBehaviour,
     {
         currentItem = null;
         icon.sprite = null;
+        icon.color = new Color(1f, 1f, 1f, 0);
     }
 
     public virtual bool IsAllow(ItemData item)
@@ -74,7 +78,8 @@ public class ItemSlotUI : MonoBehaviour,
         if (currentItem == null)
             return;
         DragManager.Instance.StartDrag(this);
-        icon.sprite = null;
+        icon.color = new Color(1f, 1f, 1f, 0);
+        countUI.text = "";
     }
 
     public void OnDrag(PointerEventData eventData)

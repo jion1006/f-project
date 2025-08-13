@@ -42,6 +42,11 @@ public class MoveHero : MovingObject, IPlayerState
             stateMachine.ChangeState(PlayerStateType.UI);
             nearNPC.OpenTargetUI();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            stateMachine.ChangeState(PlayerStateType.UI);
+            UIManager.Instance.OnMenuPanel();
+        }
     }
 
 

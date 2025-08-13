@@ -28,11 +28,6 @@ public class PlayerUI : MonoBehaviour
         mpBar.value = 1f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void HPbarUpdate(int currentHp, int maxHp)
     {
@@ -47,6 +42,7 @@ public class PlayerUI : MonoBehaviour
 
     public void ExpbarUPdate(int currentExp, int maxExp)
     {
+        Debug.Log("여기요");
         expBar.value = (float)currentExp / maxExp;
     }
 }

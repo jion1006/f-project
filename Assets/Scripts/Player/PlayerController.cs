@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private int currentMp;
     [SerializeField]
     private int currenExp = 0;
+
     public event Action<int, int> OnHealthChanged;
     public event Action<int, int> OnExpChanged;
     public event Action OnLevelChanged;
@@ -70,7 +71,6 @@ public class PlayerController : MonoBehaviour
         playerStat.coin = loadStat.coin;
     }
 
-    // Update is called once per frame
     void Update()
     {
         thePS.currentState.HandleInput();
@@ -78,8 +78,10 @@ public class PlayerController : MonoBehaviour
 
     public void AttackDamaged(int _monAttack)
     {
-
-        currentHp -= _monAttack;
+        int dmg = 1;
+        if (_monAttack - playerStat.def > 0)
+            dmg = _monAttack - playerStat.def;
+        currentHp -= dmg;
         if (currentHp <= 0)
         {
             thePS.ChangeState(PlayerStateType.Dead);
@@ -101,6 +103,7 @@ public class PlayerController : MonoBehaviour
     }
     public void GetExp(int _exp)
     {
+        
         currenExp += _exp;
         if (currenExp >= playerStat.maxExp)
             LevelUp();

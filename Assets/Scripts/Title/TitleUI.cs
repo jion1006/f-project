@@ -11,7 +11,6 @@ public class TitleUI : MonoBehaviour
     public void OnClickStart()
     {
 
-        Debug.Log("버튼누림");
         GameManager.Instance.ChangeScene("TownScene");
     }
 

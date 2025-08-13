@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject enforceUI;
     public GameObject dragUI;
     public ItemInfoUI itemInfo;
-
+    public GameObject menuUI;
     public static UIManager Instance;
     void Awake()
     {
@@ -26,17 +26,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
 
     public void OnInvenPanel()
@@ -51,6 +41,11 @@ public class UIManager : MonoBehaviour
     {
         enforceUI.SetActive(true);
     }
+    public void OnMenuPanel()
+    {
+        menuUI.SetActive(true);
+    }
+
     public void OnTooltipPanel(ItemData _item, Vector2 _postion)
     {
         itemInfo.ShowTooltip(_item, _postion);

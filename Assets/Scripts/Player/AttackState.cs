@@ -73,7 +73,6 @@ public class AttackState : MonoBehaviour,IPlayerState
     {
         animator.ResetTrigger("Attack1");
         animator.ResetTrigger("Attack2");
-
     }
 
 

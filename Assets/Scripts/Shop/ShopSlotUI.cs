@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.UI;
+using System;
 
 public class ShopSlotUI : MonoBehaviour
 {
@@ -14,24 +14,23 @@ public class ShopSlotUI : MonoBehaviour
     public ShopItem shopItem;
     public ShopUI shopUI;
 
+    public event Action OnBuy;
+
     // Start is called before the first frame update
     void Start()
     {
         shopUI = GetComponentInParent<ShopUI>();
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+   
     public void BuyShopItem()
     {
         if (shopItem.price <= PlayerController.Instance.playerStat.coin)
         {
             PlayerController.Instance.playerStat.coin -= shopItem.price;
             InvenManager.Instance.Add(shopItem.item);
+            OnBuy?.Invoke();
         }
         else
         {
@@ -39,11 +38,12 @@ public class ShopSlotUI : MonoBehaviour
         }
     }
 
-    public void SetItem(ShopItem _shopItem)
+    public void SetItem(ShopSet _shopItem)
     {
-        shopItem = _shopItem;
-        itemName.text = _shopItem.item.itemName;
-        itemPrice.text = _shopItem.price.ToString();
-        itemImage.sprite = _shopItem.item.icon;
+        shopItem.item = DataManager.Instance.GetItem(_shopItem.itemID);
+        shopItem.price = _shopItem.price;
+        itemName.text = shopItem.item.itemName;
+        itemPrice.text = shopItem.price.ToString();
+        itemImage.sprite = shopItem.item.icon;
     }
 }

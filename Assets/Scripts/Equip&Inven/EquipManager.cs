@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+[Serializable]
+public class ItemStat
+{
+    public int atk = 0;
+    public int def = 0;
+    public int maxHP = 0;
+}
 public class EquipManager : MonoBehaviour, IItemContainer
 {
     private EquipItemData[] theEq;
@@ -77,5 +83,20 @@ public class EquipManager : MonoBehaviour, IItemContainer
         {
             theEq[i] = null;
         }
+    }
+
+    public ItemStat GetItemStat()
+    {
+        ItemStat restat = new ItemStat();
+        for (int i = 0; i < theEq.Length; ++i)
+        {
+            EquipItemData equip = theEq[i];
+            if (equip == null)
+                continue;
+            restat.atk += equip.itemAtk;
+            restat.def += equip.itemDef;
+            restat.maxHP += equip.itemHp;
+        }
+        return restat;
     }
 }

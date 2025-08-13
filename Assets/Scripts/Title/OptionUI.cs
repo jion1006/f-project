@@ -37,11 +37,7 @@ public class OptionUI : MonoBehaviour
         exitButton.onClick.AddListener(exit);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
 
     private void bgmClick()

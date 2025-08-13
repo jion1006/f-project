@@ -12,10 +12,16 @@ public class ShopItem
     public int price;
 
 }
+[Serializable]
+public class ShopSet
+{
+    public int itemID;
+    public int price;
+}
 
 public class ShopUI : MonoBehaviour
 {
-    public List<ShopItem> shopItems;
+    public List<ShopSet> shopItems;
     public List<ShopSlotUI> shopSlotUIs;
     public GameObject total;
     public GameObject error;
@@ -26,6 +32,7 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < shopItems.Count; ++i)
         {
             shopSlotUIs[i].SetItem(shopItems[i]);
+            shopSlotUIs[i].OnBuy += RefreshUI;
         }
     }
 
@@ -36,6 +43,10 @@ public class ShopUI : MonoBehaviour
             OnCloseButton();
     }
 
+    void OnEnable()
+    {
+        RefreshUI();
+    }
     public void OnCloseButton()
     {
         UIManager.Instance.CloseUI(total, () =>
@@ -47,5 +58,10 @@ public class ShopUI : MonoBehaviour
     public void OnErrorPanel()
     {
         error.SetActive(true);
+    }
+
+    public void RefreshUI()
+    {
+        coinText.text = PlayerController.Instance.playerStat.coin.ToString();
     }
 }

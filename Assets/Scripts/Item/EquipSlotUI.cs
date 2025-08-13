@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class EquipSlotUI : ItemSlotUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    
     public override bool IsAllow(ItemData item)
     {
         if (item == null) return true;

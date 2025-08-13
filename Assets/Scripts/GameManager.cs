@@ -66,8 +66,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(_sceneName);
         if (PlayerController.Instance != null)
         {
-            if (_sceneName == "TitleScene" || _sceneName == "DungenSelect")
+            if (_sceneName == "DungenSelect")
                 PlayerController.Instance.gameObject.SetActive(false);
+            else if (_sceneName == "StartScene")
+            {
+                Destroy(PlayerController.Instance.gameObject);
+            }
             else
             {
                 PlayerController.Instance.gameObject.SetActive(true);

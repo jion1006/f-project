@@ -22,9 +22,8 @@ public class ItemSaveData
 }
 
 [Serializable]
-public class EquipSaveData
+public class EquipSaveData:ItemSaveData
 {
-    public int itemID;
     public int enforce;
 }
 
@@ -74,12 +73,27 @@ public class SaveLoadManager : MonoBehaviour
                 ItemData item = array[i];
                 if (item != null)
                 {
-                    save.itemSave.Add(new ItemSaveData
+                    if (type == ItemType.Equip)
                     {
-                        itemID = item.itemID,
-                        itemCount = item.itemCount,
-                        index = i
-                    });
+                        EquipItemData eqI = item as EquipItemData;
+                        save.itemSave.Add(new EquipSaveData
+                        {
+                            itemID = eqI.itemID,
+                            itemCount = 1,
+                            enforce = eqI.enforce,
+                            index=i
+                        });
+                    }
+                    else
+                    {
+                        save.itemSave.Add(new ItemSaveData
+                        {
+                            itemID = item.itemID,
+                            itemCount = item.itemCount,
+                            index = i
+                        });
+                    }
+                        
                 }
             }
         }
@@ -92,6 +106,7 @@ public class SaveLoadManager : MonoBehaviour
                 save.equipSave.Add(new EquipSaveData
                 {
                     itemID = equip.itemID,
+                    itemCount=1,
                     enforce = equip.enforce
                 });
             }

@@ -17,10 +17,10 @@ public class PAttackCollider : MonoBehaviour
         if (collision.CompareTag("Monster"))
         {
             MonsterController ms = collision.GetComponent<MonsterController>();
-            int atk = playerController.playerStat.atk;
+            ItemStat itemStat = EquipManager.Instance.GetItemStat();
+            int atk = playerController.playerStat.atk + itemStat.atk;
             if (ms != null)
             {
-
                 StartCoroutine(DmgCoroutine(atk,1f));
                 ms.Damaged(atk);
             }

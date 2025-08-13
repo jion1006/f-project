@@ -30,11 +30,7 @@ public class DragManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
 
 
@@ -64,7 +60,9 @@ public class DragManager : MonoBehaviour
         if (originSlot == null || originSlot.currentItem == null)
             return;
         isDrag = false;
-        originSlot.icon.sprite = originSlot.currentItem.icon;
+        originSlot.SetSlot(originSlot.itemContainer, originSlot.currentItem, originSlot.index);
+        //originSlot.icon.sprite = originSlot.currentItem.icon;
+        //originSlot.icon.color = new Color(1f, 1f, 1f, 1f);
         originSlot = null;
     }
     public void TrySwapSlot(ItemSlotUI targetSlot)

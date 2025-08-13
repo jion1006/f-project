@@ -5,6 +5,7 @@ using UnityEngine;
 public class InTown : MonoBehaviour
 {
     private static bool isLoading = false;
+    public GameObject startPostion;
     public GameObject playerSpawn;
     public BoxCollider2D townBound;
     public CameraManager cameraManager;
@@ -17,13 +18,17 @@ public class InTown : MonoBehaviour
         }
         else
         {
+            PlayerController.Instance.transform.position = startPostion.transform.position;
+
             isLoading = true;
         }
 
         townBound = GetComponent<BoxCollider2D>();
         cameraManager.SetBound(townBound);
         if (SaveLoadManager.Instance.isLoad)
+        {
             IsLoding();
+        }
     }
 
     public void IsLoding()
@@ -45,6 +50,9 @@ public class InTown : MonoBehaviour
             equip.isEquip = true;
             EquipManager.Instance.SetItem(ItemType.Equip, (int)equip.equipType, equip);
         }
+        Debug.Log("로딩");
+        PlayerController.Instance.transform.position = startPostion.transform.position;
+
 
     }
 }

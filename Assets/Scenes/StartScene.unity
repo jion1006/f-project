@@ -2594,7 +2594,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308362488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2633,6 +2633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LMstate:
   - {fileID: 11400000, guid: 0b51d9d0e003319438be3c6ae67719c5, type: 2}
+  - {fileID: 11400000, guid: 819b619deee389b46ac63b9b6f539afc, type: 2}
   LItem:
   - {fileID: 11400000, guid: d34b6159b80a00247b357d10be8dbe5e, type: 2}
   - {fileID: 11400000, guid: a486c4c24341cab459a25a025c84fa81, type: 2}
@@ -2645,13 +2646,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 743faa81ed27bdd40875a2aee8690426, type: 2}
   - {fileID: 11400000, guid: 54e983d462e979348a52dbaa0e46a534, type: 2}
   - {fileID: 11400000, guid: c7bec5e7cb9a7f74db3d946f1a5e3b51, type: 2}
+  - {fileID: 11400000, guid: 47b7c2b002735974f88e22e849f03602, type: 2}
   playerStat:
     maxHp: 100
     maxMp: 100
     atk: 10
     def: 5
-    maxExp: 0
-    level: 0
+    maxExp: 100
+    level: 1
     coin: 200
 --- !u!4 &1355621777
 Transform:

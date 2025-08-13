@@ -8,6 +8,4 @@ public abstract class BaseNPC : MonoBehaviour
 
     public abstract void OpenTargetUI();
     
-
-    
 }
