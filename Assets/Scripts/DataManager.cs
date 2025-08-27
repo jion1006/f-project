@@ -13,11 +13,13 @@ public class DataManager : MonoBehaviour
     private List<ItemData> LItem;
     [SerializeField]
     private PlayerStat playerStat;
+    [SerializeField]
+    private List<QuestData> LQuest;
 
 
     private Dictionary<int, MonsterStat> DMstate;
     private Dictionary<int, ItemData> DItem;
-
+    private Dictionary<int, QuestData> DQuest;
     public static DataManager Instance;
 
     void Awake()
@@ -34,6 +36,7 @@ public class DataManager : MonoBehaviour
 
         DMstate = LMstate.ToDictionary(stat => stat.ID);
         DItem = LItem.ToDictionary(item => item.itemID);
+        DQuest = LQuest.ToDictionary(quest => quest.questId);
     }
 
     public void Start()
@@ -58,7 +61,22 @@ public class DataManager : MonoBehaviour
     {
         var item = DItem[_id];
         if (item != null)
-            return item.Clone();
+        {
+            ItemData RItem = Instantiate(item);
+            return RItem;
+        }
+
+        return null;
+    }
+
+    public QuestData GetQuest(int _id)
+    {
+        var quest = DQuest[_id];
+        if (quest != null)
+        {
+            QuestData RQuest = Instantiate(quest);
+            return RQuest;
+        }
         return null;
     }
 }

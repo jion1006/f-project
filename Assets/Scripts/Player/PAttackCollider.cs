@@ -14,17 +14,17 @@ public class PAttackCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+
+        var dmg = collision.GetComponent<IDamagable>();
+        ItemStat itemStat = EquipManager.Instance.GetItemStat();
+        int atk = playerController.playerStat.atk + itemStat.atk;
+
+        if (dmg != null)
         {
-            MonsterController ms = collision.GetComponent<MonsterController>();
-            ItemStat itemStat = EquipManager.Instance.GetItemStat();
-            int atk = playerController.playerStat.atk + itemStat.atk;
-            if (ms != null)
-            {
-                StartCoroutine(DmgCoroutine(atk,1f));
-                ms.Damaged(atk);
-            }
+            StartCoroutine(DmgCoroutine(atk, 1f));
+            dmg.Damaged(atk);
         }
+
     }
 
     IEnumerator DmgCoroutine(int _atk,float duration)

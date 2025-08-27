@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public interface IDamagable
+{
+    public void Damaged(int _atk);
+}
 
-
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour, IDamagable
 {
 
     [Header("탐지범위")]

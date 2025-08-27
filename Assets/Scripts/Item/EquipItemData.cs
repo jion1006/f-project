@@ -30,24 +30,6 @@ public class EquipItemData : ItemData
             EquipManager.Instance.UnEquip(equipType);
     }
 
-    public override ItemData Clone()
-    {
-        EquipItemData item = ScriptableObject.CreateInstance<EquipItemData>();
-        item.itemType = itemType;
-        item.itemName = itemName;
-        item.icon = icon;
-        item.itemID = itemID;
-        item.itemCount = itemCount;
-        item.description = description;
-
-        item.equipType = equipType;
-        item.itemAtk = itemAtk;
-        item.itemDef = itemDef;
-        item.itemHp = itemHp;
-
-        item.enforce = enforce;
-        item.isEquip = isEquip;
-        return item;
-    }
+    
 
 }

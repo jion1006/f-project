@@ -71,21 +71,19 @@ public class DragManager : MonoBehaviour
         if (originSlot == null)
             return;
         if (targetSlot == null || originSlot == targetSlot|| originSlot == null)
-            {
-                originSlot.icon.sprite = originSlot.currentItem ? originSlot.currentItem.icon : null;
-                return;
-            }
+        {
+            CancelDrag();
+            return;
+        }
         var originItem = originSlot.GetItem();
         var targetItem = targetSlot.GetItem();
 
         if (!targetSlot.IsAllow(originItem) || !originSlot.IsAllow(targetItem))
         {
-            originSlot.icon.sprite = originSlot.currentItem.icon;
+            CancelDrag();
             return;
         }
 
-
-        Debug.Log("떨굼");
 
         originSlot.SetItem(targetItem);
         targetSlot.SetItem(originItem);

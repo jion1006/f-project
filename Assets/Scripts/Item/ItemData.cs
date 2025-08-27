@@ -24,16 +24,5 @@ public class ItemData : ScriptableObject
     
     public virtual void Use(ItemSlotUI slotUI) { }
 
-    public virtual ItemData Clone()
-    {
-        ItemData item = ScriptableObject.CreateInstance<ItemData>();
-        item.itemType = itemType;
-        item.itemName = itemName;
-        item.icon = icon;
-        item.itemID = itemID;
-        item.itemCount = itemCount;
-        item.description = description;
-
-        return item;
-    }
+    
 }

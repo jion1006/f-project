@@ -42,7 +42,7 @@ public class EquipUI : MonoBehaviour
         ItemStat itemStat = EquipManager.Instance.GetItemStat();
         statL[0].text = "ATK : " + (stat.atk + itemStat.atk).ToString();
         statL[1].text = "DEF : " + (stat.def + itemStat.def).ToString();
-        statL[2].text = "MaxHP : " + (stat.maxHp + itemStat.maxHP).ToString();
+        statL[2].text = "HP : " +PlayerController.Instance.currentHp.ToString()+" / "+(stat.maxHp + itemStat.maxHP).ToString();
         statL[3].text = "Level : " + stat.level.ToString();
 
     }

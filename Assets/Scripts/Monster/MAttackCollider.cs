@@ -13,10 +13,9 @@ public class MAttackCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Player"))
-        {
-            PlayerController.Instance.AttackDamaged(mosterCT.monsterStat.atk);
-        }
+        var dmg = other.GetComponent<IDamagable>();
+        if(dmg!=null)
+            dmg.Damaged(mosterCT.monsterStat.atk);
     }
+    
 }

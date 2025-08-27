@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IDamagable
 {
     public PlayerStateMachine thePS;
     public static PlayerController Instance;
 
 
     [SerializeField]
-    private int currentHp;
+    public int currentHp;
     [SerializeField]
     private int currentMp;
     [SerializeField]
@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         currentHp = playerStat.maxHp;
         currentMp = playerStat.maxMp;
+        OnHealthChanged?.Invoke(currentHp, playerStat.maxHp);
+
     }
 
     public void SetLoad(PlayerStat loadStat)
@@ -76,7 +78,7 @@ public class PlayerController : MonoBehaviour
         thePS.currentState.HandleInput();
     }
 
-    public void AttackDamaged(int _monAttack)
+    public void Damaged(int _monAttack)
     {
         int dmg = 1;
         if (_monAttack - playerStat.def > 0)
