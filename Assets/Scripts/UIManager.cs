@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject shopUI;
     public GameObject enforceUI;
     public GameObject dragUI;
+    public GameObject questMenuUI;
     public ItemInfoUI itemInfo;
     public GameObject menuUI;
     public static UIManager Instance;
@@ -40,6 +41,10 @@ public class UIManager : MonoBehaviour
     public void OnEnforcePanel()
     {
         enforceUI.SetActive(true);
+    }
+    public void OnQuestMenuPanel()
+    {
+        questMenuUI.SetActive(true);
     }
     public void OnMenuPanel()
     {

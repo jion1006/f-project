@@ -29,6 +29,7 @@ public class MonsterDead : MonoBehaviour, IMonsterState
     {
         PlayerController.Instance.GetExp(monster.monsterStat.exp);
         OnDeadEvent?.Invoke();
+        QuestManager.Instance.KillGet(monster.monsterStat.ID);
         Destroy(gameObject);
     }
 

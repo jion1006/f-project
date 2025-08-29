@@ -19,6 +19,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
     public List<int> prevDatas;
 
     public event Action OnitemChanged;
+    public event Action<int> OnitemAdd;
 
 
     public int slotsize = 40;
@@ -70,6 +71,7 @@ public class InvenManager : MonoBehaviour, IItemContainer
             {
                 array[i].itemCount++;
                 OnitemChanged?.Invoke();
+                QuestManager.Instance.ItemGet(_item.itemID);
                 return;
             }
         }
@@ -79,6 +81,8 @@ public class InvenManager : MonoBehaviour, IItemContainer
             {
                 array[i] = _item;
                 OnitemChanged?.Invoke();
+                OnitemAdd?.Invoke(_item.itemID);
+                QuestManager.Instance.ItemGet(_item.itemID);
                 return;
             }
 
