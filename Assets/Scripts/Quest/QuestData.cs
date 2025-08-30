@@ -33,14 +33,15 @@ public class QuestData : ScriptableObject
     public int[] RewarditemID;
 
     public event Action<int> OnClearQuest;
+    public event Action<int> OnCountChanged;
 
     //퀘스트 타입
     public QuestType questType;
     //퀘스트 타입에 따른 몬스터 또는 아이템 ID 및 카운트
     public int id;
-    private int currentCount = 0;
+    [HideInInspector]public int currentCount = 0;
     [SerializeField]
-    private int targetCount = 0;
+    public int targetCount = 0;
 
 
     //퀘스트UI에 들어가는 설명
@@ -57,6 +58,7 @@ public class QuestData : ScriptableObject
             currentCount++;
         if (currentCount >= targetCount)
             OnClearQuest?.Invoke(questId);
+        OnCountChanged?.Invoke(questId);
 
     }
 

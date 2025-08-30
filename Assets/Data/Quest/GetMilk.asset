@@ -16,10 +16,11 @@ MonoBehaviour:
   questId: 0
   getEXP: 10
   RewarditemID: 01000000
-  questType: 0
-  id: 1
-  targetCount: 4
-  questName: "\uACE0\uBE14\uB9B0"
-  shortDes: "\uACE0\uBE14\uB9B04\uB9C8\uB9AC"
-  longDes: "\uC0B0\uC5D0\uC11C \uACE0\uBE14\uB9B0 4\uB9C8\uB9AC\uB97C \uC7A1\uC790"
+  questType: 1
+  id: 10
+  currentCount: 0
+  targetCount: 1
+  questName: "\uC6B0\uC720"
+  shortDes: "\uC6B0\uC7201\uAC1C \uC0AC\uC624\uC790"
+  longDes: "\uC0C1\uC810\uC5D0\uC11C \uC6B0\uC720 1\uAC1C \uC0AC\uC624\uC790"
   nextQuest: 

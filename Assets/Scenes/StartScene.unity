@@ -559,7 +559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TINY SWORD
+  m_text: Tiny Sword
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bba4797c376ce0f41b7e4ea3ef304144, type: 2}
   m_sharedMaterial: {fileID: -7400879192137902846, guid: bba4797c376ce0f41b7e4ea3ef304144,

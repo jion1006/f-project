@@ -62,6 +62,7 @@ public class QuestManager : MonoBehaviour
         DQuest[_id].OnClearQuest -= ClearQuest;
         data.GetReward();
         data.EndQuest();
+        activeQuest.Remove(_id);
         foreach (int nId in data.nextQuest)
         {
             DQuest[nId].questState = QuestState.NoStart;
@@ -72,11 +73,15 @@ public class QuestManager : MonoBehaviour
     public void ItemGet(int _id)
     {
         OnItemQuest?.Invoke(_id);
+        OnQuestChanged?.Invoke();
+
     }
 
     public void KillGet(int _id)
     {
         OnKillQuest?.Invoke(_id);
+        OnQuestChanged?.Invoke();
+
     }
 
     public Dictionary<int, QuestData> GetActiveQuest()

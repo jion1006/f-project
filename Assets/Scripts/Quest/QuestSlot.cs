@@ -36,6 +36,10 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             button.onClick.AddListener(OnEndButton);
             buttonText.text = "완료";
         }
+        else
+        {
+            buttonText.text = "진행중";
+        }
     }
 
     public void OngoingButton()
