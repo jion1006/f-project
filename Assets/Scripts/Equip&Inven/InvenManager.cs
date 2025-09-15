@@ -13,7 +13,7 @@ public interface IItemContainer
 
 public class InvenManager : MonoBehaviour, IItemContainer
 {
-    private Dictionary<ItemType, ItemData[]> theItemL;
+    private Dictionary<ItemType, ItemData[]> DItem;
 
     public static InvenManager Instance;
     public List<int> prevDatas;
@@ -36,16 +36,22 @@ public class InvenManager : MonoBehaviour, IItemContainer
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
-
+        
     }
 
     void Start()
     {
-        theItemL = new Dictionary<ItemType, ItemData[]>();
+        DItem = new Dictionary<ItemType, ItemData[]>();
         foreach (ItemType item in Enum.GetValues(typeof(ItemType)))
         {
-            theItemL[item] = new ItemData[slotsize];
+            DItem[item] = new ItemData[slotsize];
         }
+        SaveLoadManager.Instance.OnStartLoad += Load;
+    }
+    
+    public void Init()
+    {
+        ClearAll();
         for (int i = 0; i < prevDatas.Count; ++i)
         {
             Add(DataManager.Instance.GetItem(prevDatas[i]));
@@ -53,18 +59,30 @@ public class InvenManager : MonoBehaviour, IItemContainer
 
         for (int i = 0; i < slotsize; ++i)
         {
-            if (theItemL[ItemType.Equip][i] != null)
+            if (DItem[ItemType.Equip][i] != null)
             {
-                EquipItemData startEquip = theItemL[ItemType.Equip][i] as EquipItemData;
+                EquipItemData startEquip = DItem[ItemType.Equip][i] as EquipItemData;
                 startEquip.isEquip = false;
-                theItemL[ItemType.Equip][i] = startEquip;
+                DItem[ItemType.Equip][i] = startEquip;
             }
+        }
+    }
+
+    public void Load()
+    {
+        SaveData data = SaveLoadManager.Instance.load;
+        ClearAll();
+        foreach (var items in data.itemSave)
+        {
+            ItemData item = DataManager.Instance.GetItem(items.itemID);
+            item.itemCount = items.itemCount;
+            SetItem(item.itemType, items.index, item);
         }
     }
 
     public void Add(ItemData _item)
     {
-        var array = theItemL[_item.itemType];
+        var array = DItem[_item.itemType];
         for (int i = 0; i < array.Length; ++i)
         {
             if (array[i] != null && array[i].itemType != ItemType.Equip && array[i].itemID == _item.itemID)
@@ -91,48 +109,71 @@ public class InvenManager : MonoBehaviour, IItemContainer
 
     public ItemData GetItem(ItemType itemType, int index)
     {
-        return theItemL[itemType][index];
+        return DItem[itemType][index];
     }
+
     public void SetItem(ItemType itemType, int index, ItemData item)
     {
         if (item != null && itemType == ItemType.Equip)
         {
             EquipItemData equip = item as EquipItemData;
             equip.isEquip = false;
-            theItemL[itemType][index] = equip;
+            DItem[itemType][index] = equip;
         }
         else
         {
-            theItemL[itemType][index] = item;
+            DItem[itemType][index] = item;
         }
         OnitemChanged?.Invoke();
 
     }
 
+
+
+    public void ReduceItem(int _id, int _count)
+    {
+        ItemData sample = DataManager.Instance.GetItem(_id);
+        var itemL = DItem[sample.itemType];
+        for (int i = 0; i < itemL.Length; ++i)
+        {
+            if (itemL[i] != null && itemL[i].itemID == _id)
+            {
+                itemL[i].itemCount -= _count;
+                if (itemL[i].itemCount <= 0)
+                    ClearItem(itemL[i].itemType, i);
+                break;
+            }
+        }
+        Destroy(sample);
+    }
+    
+
     public void ClearItem(ItemType itemType, int index)
     {
-        theItemL[itemType][index] = null;
+        Destroy(DItem[itemType][index]);
+        DItem[itemType][index] = null;
         OnitemChanged?.Invoke();
     }
 
     public ItemData[] GetItemArray(ItemType _itemType)
     {
 
-        return theItemL[_itemType];
+        return DItem[_itemType];
     }
 
     public Dictionary<ItemType, ItemData[]> GetAll()
     {
-        return theItemL;
+        return DItem;
     }
 
     public void ClearAll()
     {
-        foreach (var itemL in theItemL)
+        foreach (var itemL in DItem)
         {
             ItemData[] items = itemL.Value;
             for (int i = 0; i < items.Length; ++i)
             {
+                Destroy(items[i]);
                 items[i] = null;
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InTown : MonoBehaviour
 {
-    private static bool isLoading = false;
+    
     public GameObject startPostion;
     public GameObject playerSpawn;
     public BoxCollider2D townBound;
@@ -12,7 +12,7 @@ public class InTown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isLoading)
+        if (GameManager.Instance.IsGame)
         {
             PlayerController.Instance.transform.position = playerSpawn.transform.position;
         }
@@ -20,7 +20,7 @@ public class InTown : MonoBehaviour
         {
             PlayerController.Instance.transform.position = startPostion.transform.position;
 
-            isLoading = true;
+            GameManager.Instance.IsGame = true;
         }
 
         townBound = GetComponent<BoxCollider2D>();
@@ -31,28 +31,10 @@ public class InTown : MonoBehaviour
         }
     }
 
+    
+
     public void IsLoding()
     {
-        SaveData data = SaveLoadManager.Instance.load;
-        InvenManager.Instance.ClearAll();
-        foreach (var items in data.itemSave)
-        {
-            ItemData item = DataManager.Instance.GetItem(items.itemID);
-            item.itemCount = items.itemCount;
-            InvenManager.Instance.SetItem(item.itemType, items.index, item);
-        }
-
-        EquipManager.Instance.ClearAll();
-        foreach (var equips in data.equipSave)
-        {
-            EquipItemData equip = DataManager.Instance.GetItem(equips.itemID) as EquipItemData;
-            equip.enforce = equips.enforce;
-            equip.isEquip = true;
-            EquipManager.Instance.SetItem(ItemType.Equip, (int)equip.equipType, equip);
-        }
-        Debug.Log("로딩");
         PlayerController.Instance.transform.position = startPostion.transform.position;
-
-
     }
 }

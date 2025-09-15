@@ -18,7 +18,9 @@ public enum PlayerStateType
     UI,
     Attack,
     Damaged,
+    Skill,
     Dead,
+    
 
 }
 [Serializable]

@@ -12,6 +12,11 @@ public class ActiveQuestUI : MonoBehaviour
         RefreshUI();
     }
 
+    void OnDestroy()
+    {
+        QuestManager.Instance.OnQuestChanged -= RefreshUI;
+    }
+
     public void RefreshUI()
     {
         AllslotClear();

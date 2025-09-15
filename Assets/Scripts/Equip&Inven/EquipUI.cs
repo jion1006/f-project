@@ -38,11 +38,10 @@ public class EquipUI : MonoBehaviour
             equipItem[i].SetSlot(EquipManager.Instance, EquipManager.Instance.GetItem(ItemType.Equip, i), i);
         }
 
-        PlayerStat stat = PlayerController.Instance.playerStat;
-        ItemStat itemStat = EquipManager.Instance.GetItemStat();
-        statL[0].text = "ATK : " + (stat.atk + itemStat.atk).ToString();
-        statL[1].text = "DEF : " + (stat.def + itemStat.def).ToString();
-        statL[2].text = "HP : " +PlayerController.Instance.currentHp.ToString()+" / "+(stat.maxHp + itemStat.maxHP).ToString();
+        PlayerStat stat = PlayerController.Instance.GetTotal();
+        statL[0].text = "ATK : " + stat.atk.ToString();
+        statL[1].text = "DEF : " + stat.def.ToString();
+        statL[2].text = "HP : " +stat.currentHp.ToString()+" / "+stat.maxHp.ToString();
         statL[3].text = "Level : " + stat.level.ToString();
 
     }

@@ -1,0 +1,68 @@
+{
+    "name": "SkillInput",
+    "maps": [
+        {
+            "name": "Skill",
+            "id": "50bb77ef-b957-4589-9374-3cc55e62c5f1",
+            "actions": [
+                {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "dd583cd6-bb95-4bb5-8904-f222b555657f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "918cd52c-5f5e-46f7-b818-7b924b31dc75",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PlayerSkill",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "138f2228-9080-4873-ae7c-1065b9af5510",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PlayerSkill",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efe11fa2-17ca-459d-8ad6-ceca6f8bebf0",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PlayerSkill",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PlayerSkill",
+            "bindingGroup": "PlayerSkill",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

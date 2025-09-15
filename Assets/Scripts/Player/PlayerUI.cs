@@ -24,8 +24,16 @@ public class PlayerUI : MonoBehaviour
     {
         PlayerController.Instance.OnHealthChanged += HPbarUpdate;
         PlayerController.Instance.OnExpChanged += ExpbarUPdate;
+        PlayerController.Instance.OnManaChanged += MPbarUpdate;
         hpBar.value = 1f;
         mpBar.value = 1f;
+    }
+
+    void OnDestroy()
+    {
+        PlayerController.Instance.OnHealthChanged -= HPbarUpdate;
+        PlayerController.Instance.OnExpChanged -= ExpbarUPdate;
+        PlayerController.Instance.OnManaChanged -= MPbarUpdate;
     }
 
 
@@ -42,7 +50,6 @@ public class PlayerUI : MonoBehaviour
 
     public void ExpbarUPdate(int currentExp, int maxExp)
     {
-        Debug.Log("여기요");
         expBar.value = (float)currentExp / maxExp;
     }
 }

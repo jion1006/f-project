@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEditor.Build.Player;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Image fade;
 
+    public  bool IsGame = false;
     public float duration = 0.7f;
 
     void Awake()
@@ -43,12 +43,7 @@ public class GameManager : MonoBehaviour
         PlaySceneBGM(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+   
     public void ChangeScene(string _sceneName)
     {
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class MoveHero : MovingObject, IPlayerState
 {
@@ -10,6 +12,8 @@ public class MoveHero : MovingObject, IPlayerState
 
     public BaseNPC nearNPC;
     private PlayerStateMachine stateMachine;
+
+
 
     void Start()
     {
@@ -85,5 +89,19 @@ public class MoveHero : MovingObject, IPlayerState
     {
         if (collision.GetComponent<BaseNPC>() == nearNPC)
             nearNPC = null;
+    }
+
+    public void OnSkill(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (context.control is KeyControl keyCtrl)
+            {
+                Key code = keyCtrl.keyCode;
+                if (SkillManager.Instance.StartSkill(code))
+                    stateMachine.ChangeState(PlayerStateType.Skill);
+            }
+        }
+        
     }
 }

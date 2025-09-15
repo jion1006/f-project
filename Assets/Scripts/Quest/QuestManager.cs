@@ -34,6 +34,10 @@ public class QuestManager : MonoBehaviour
     }
 
 
+    void Start()
+    {
+        SaveLoadManager.Instance.OnStartLoad += LoadQuest;
+    }
     public void SetAllQuest()
     {
         foreach (QuestData quest in LQuest)
@@ -42,12 +46,22 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void LoadQuest()
+    {
+        SaveData data = SaveLoadManager.Instance.load;
+        foreach (QuestSave load in data.questSaves)
+        {
+            DQuest[load.questId].questState = load.questState;
+            DQuest[load.questId].currentCount = load.currentCount;
+        }
+    }
+
     public void GoingQuest(int _id)
     {
         DQuest[_id].questState = QuestState.OnGoing;
         DQuest[_id].StartQuest();
         DQuest[_id].OnClearQuest += ClearQuest;
-        activeQuest[_id]=DQuest[_id];
+        activeQuest[_id] = DQuest[_id];
         OnQuestChanged?.Invoke();
     }
     public void ClearQuest(int _id)

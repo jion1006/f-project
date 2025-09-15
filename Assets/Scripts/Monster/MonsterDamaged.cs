@@ -16,6 +16,7 @@ public class MonsterDamaged : MonoBehaviour, IMonsterState
 
     public void Enter(MonsterController theMC, MonsterStateMachine theMS)
     {
+        StopAllCoroutines();
         monsterSM = theMS;
         animator.CrossFade("Damaged Tree", 0.05f);
     }

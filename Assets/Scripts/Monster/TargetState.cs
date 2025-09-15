@@ -8,22 +8,28 @@ public class TargetState : MovingObject, IMonsterState
     private MonsterController monsterCT;
     private MonsterStateMachine monsterMC;
 
+    Coroutine targetC;
     float dist = 0f;
     Vector2 dir = Vector2.zero;
     public void Enter(MonsterController theMC, MonsterStateMachine theMS)
     {
         monsterCT = theMC;
         monsterMC = theMS;
-        StartCoroutine(StartTarget());
+        targetC = StartCoroutine(StartTarget());
 
     }
 
     public void Exit()
     {
+        if (targetC != null)
+        {
+            StopCoroutine(targetC);
+            targetC = null;
+        }
+        Debug.Log("타겟 나가기");
         Stop();
-        StopCoroutine(StartTarget());
     }
-    
+
     IEnumerator StartTarget()
     {
         while (true)
@@ -41,6 +47,7 @@ public class TargetState : MovingObject, IMonsterState
             }
             else
             {
+                yield return null;
                 Move(dir);
             }
 

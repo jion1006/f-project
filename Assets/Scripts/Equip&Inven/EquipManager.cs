@@ -29,8 +29,30 @@ public class EquipManager : MonoBehaviour, IItemContainer
 
         DontDestroyOnLoad(gameObject);
 
-        int equipnum = System.Enum.GetNames(typeof(EquipItemType)).Length;
+    }
+    void Start()
+    {
+        int equipnum = Enum.GetNames(typeof(EquipItemType)).Length;
         theEq = new EquipItemData[equipnum];
+        SaveLoadManager.Instance.OnStartLoad += Load;
+    }
+
+    public void Init()
+    {
+        ClearAll();
+    }
+
+    public void Load()
+    {
+        SaveData data = SaveLoadManager.Instance.load;
+        ClearAll();
+        foreach (var equips in data.equipSave)
+        {
+            EquipItemData equip = DataManager.Instance.GetItem(equips.itemID) as EquipItemData;
+            equip.enforce = equips.enforce;
+            equip.isEquip = true;
+            SetItem(ItemType.Equip, (int)equip.equipType, equip);
+        }
     }
 
     public void Equip(ItemSlotUI _equipSlot)

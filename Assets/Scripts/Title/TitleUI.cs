@@ -11,6 +11,8 @@ public class TitleUI : MonoBehaviour
     public void OnClickStart()
     {
 
+        InvenManager.Instance.Init();
+        EquipManager.Instance.Init();
         GameManager.Instance.ChangeScene("TownScene");
     }
 

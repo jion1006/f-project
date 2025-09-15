@@ -25,6 +25,8 @@ public class MenuUI : MonoBehaviour
     {
         SaveLoadManager.Instance.Save();
         GameManager.Instance.ChangeScene("StartScene");
+        GameManager.Instance.IsGame = false;
+
         total.SetActive(false);
     }
 }

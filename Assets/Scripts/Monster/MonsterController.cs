@@ -57,13 +57,19 @@ public class MonsterController : MonoBehaviour, IDamagable
     {
         currentHp = Mathf.Clamp(currentHp, 0, monsterStat.maxHp);
         currentHp -= _playerAtk;
+        
         if (currentHp <= 0)
         {
             PoolManager.Instance.ReturnHpbar(hpBar);
             mStateMachine.ChangeState(MonsterStateType.Dead);
         }
         else
+        {
+            GameObject dmgText = PoolManager.Instance.GetDamageT();
+            DamageText text = dmgText.GetComponent<DamageText>();
+            text.SetTransform(transform.position, _playerAtk);
             mStateMachine.ChangeState(MonsterStateType.Damaged);
+        }
         hpChanged?.Invoke(currentHp);
     }
 }

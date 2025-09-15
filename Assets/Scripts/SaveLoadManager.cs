@@ -11,6 +11,7 @@ public class SaveData
     public PlayerStat playerStat;
     public List<ItemSaveData> itemSave;
     public List<EquipSaveData> equipSave;
+    public List<QuestSave> questSaves;
 }
 
 [Serializable]
@@ -22,15 +23,25 @@ public class ItemSaveData
 }
 
 [Serializable]
-public class EquipSaveData:ItemSaveData
+public class EquipSaveData : ItemSaveData
 {
     public int enforce;
+}
+
+[Serializable]
+public class QuestSave
+{
+    public int questId;
+    public QuestState questState;
+    public int currentCount;
 }
 
 public class SaveLoadManager : MonoBehaviour
 {
     public static SaveLoadManager Instance;
     public bool isLoad = false;
+
+    public event Action OnStartLoad;
 
     public SaveData load;
     void Awake()
@@ -112,6 +123,17 @@ public class SaveLoadManager : MonoBehaviour
             }
         }
 
+        save.questSaves = new List<QuestSave>();
+        foreach (var quest in QuestManager.Instance.GetAllQuest())
+        {
+            QuestData data = quest.Value;
+            save.questSaves.Add(new QuestSave
+            {
+                questId = data.questId,
+                questState = data.questState,
+                currentCount=data.currentCount    
+            });
+        }
 
         string json = JsonUtility.ToJson(save, true);
         Debug.Log(Application.persistentDataPath);
@@ -131,6 +153,7 @@ public class SaveLoadManager : MonoBehaviour
         
         
         isLoad = true;
+        OnStartLoad?.Invoke();
         GameManager.Instance.ChangeScene("TownScene");
     }
 }

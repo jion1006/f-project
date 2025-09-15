@@ -46,7 +46,9 @@ public class QuestData : ScriptableObject
 
     //퀘스트UI에 들어가는 설명
     public string questName;
+    [TextArea]
     public string shortDes;
+    [TextArea]
     public string longDes;
 
     //퀘스트 진행 후 연계 되는 퀘스트
@@ -78,9 +80,11 @@ public class QuestData : ScriptableObject
     public void GetReward()
     {
         PlayerController.Instance.GetExp(getEXP);
+        if (questType == QuestType.Get)
+            InvenManager.Instance.ReduceItem(id, targetCount);
         foreach (int id in RewarditemID)
-        {
-            InvenManager.Instance.Add(DataManager.Instance.GetItem(id));
-        }
+            {
+                InvenManager.Instance.Add(DataManager.Instance.GetItem(id));
+            }
     }
 }

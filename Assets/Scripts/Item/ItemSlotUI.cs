@@ -85,6 +85,7 @@ public class ItemSlotUI : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         DragManager.Instance.UpdateDrag(Input.mousePosition);
+        UIManager.Instance.EndTooltip();
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -98,8 +99,6 @@ public class ItemSlotUI : MonoBehaviour,
     {
         DragManager.Instance.TrySwapSlot(this);
     }
-
-
 
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -5,7 +5,6 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.ProjectWindowCallback;
 
 [Serializable]
 public class AudioFile
